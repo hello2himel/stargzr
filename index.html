@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stargzr - For the people who dream big and look beyond</title>
+  <meta name="description" content="Stargzr is a network for students and dreamers who refuse to be confined by traditional education systems. Join our community of curious minds.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css">
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --text-color: #f0f0f0;
+      --border-color: #333;
+      --card-bg: #111;
+      --card-hover-border: #555;
+      --tag-bg: #222;
+      --overlay-bg: rgba(0, 0, 0, 0.8);
+      --sidebar-width: 250px;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f5f5f5;
+      --text-color: #121212;
+      --border-color: #ddd;
+      --card-bg: #fff;
+      --card-hover-border: #999;
+      --tag-bg: #e9e9e9;
+      --overlay-bg: rgba(255, 255, 255, 0.95);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Space Container */
+    #space-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .space-element {
+      position: absolute;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      background-color: var(--text-color);
+      border-radius: 50%;
+      width: 3px;
+      height: 3px;
+      animation: twinkle 2s infinite ease-in-out;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
+    }
+
+    .star.small {
+      width: 2px;
+      height: 2px;
+      opacity: 0.15;
+    }
+
+    .star.medium {
+      width: 3px;
+      height: 3px;
+      opacity: 0.2;
+    }
+
+    .star.large {
+      width: 4px;
+      height: 4px;
+      opacity: 0.25;
+    }
+
+    .planet {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFC107, #FFD54F);
+      box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
+      transition: transform 0.3s ease-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Header Controls */
+    .header-controls {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.8rem;
+      z-index: 900;
+    }
+
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .header-button:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--bg-color);
+      border-left: 1px solid var(--border-color);
+      padding: 2rem;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-button {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sidebar-button:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+    }
+
+    .sidebar-menu {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .sidebar-link {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: background 0.2s;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-link:hover {
+      background: var(--card-bg);
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 1rem 0;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay-bg);
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Main Layout */
+    .main-container {
+      padding: 2rem;
+      padding-top: 5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+
+    .logo-container {
+      margin-bottom: 2rem;
+    }
+
+    .logo {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      opacity: 0.85;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .cta-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Feature Cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Project Cards */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 180px;
+      background: var(--tag-bg);
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Video Cards */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .video-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 160px;
+      background: var(--tag-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    .video-info {
+      padding: 1rem;
+    }
+
+    .video-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Form Styling */
+    .form-container {
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-color);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--card-hover-border);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-2px);
+      border-color: var(--card-hover-border);
+    }
+
+    /* Article Cards */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--text-color);
+      display: block;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+    }
+
+    .article-meta {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-top: 0.5rem;
+    }
+
+    .article-excerpt {
+      margin: 1rem 0;
+    }
+
+    /* Contact Section */
+    .contact-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .contact-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      text-decoration: none;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    /* Filter Buttons */
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-button {
+      padding: 0.5rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .filter-button:hover, .filter-button.active {
+      border-color: var(--card-hover-border);
+      background: var(--tag-bg);
+    }
+
+    /* About Section Specific */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .founder-note {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 6px;
+      margin: 2rem 0;
+    }
+
+    /* Responsive */
+    @media (min-width: 769px) {
+      .planet {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .planet {
+        display: block !important;
+      }
+      
+      .hero-section {
+        padding: 3rem 1rem;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .features-grid,
+      .projects-grid,
+      .videos-grid,
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .main-container {
+        padding: 1.5rem;
+        padding-top: 4rem;
+      }
+    }
+
+    /* Page visibility */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Space Animation Container -->
+  <div id="space-container"></div>
+  
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-controls">
+      <button class="sidebar-button" id="theme-toggle-sidebar" title="Toggle theme">
+        <i class="ri-lg ri-moon-clear-fill"></i>
+      </button>
+      <button class="sidebar-button" id="sidebar-collapse" title="Collapse sidebar">
+        <i class="ri-lg ri-arrow-right-s-line"></i>
+      </button>
+    </div>
+    <div class="sidebar-menu">
+      <a href="#home" class="sidebar-link" data-page="home">
+        <i class="ri-lg ri-home-line"></i> Home
+      </a>
+      <a href="#about" class="sidebar-link" data-page="about">
+        <i class="ri-lg ri-information-line"></i> About
+      </a>
+      <a href="#projects" class="sidebar-link" data-page="projects">
+        <i class="ri-lg ri-rocket-line"></i> Projects
+      </a>
+      <a href="#feynman-files" class="sidebar-link" data-page="feynman-files">
+        <i class="ri-lg ri-video-line"></i> Feynman Files
+      </a>
+      <a href="#join" class="sidebar-link" data-page="join">
+        <i class="ri-lg ri-user-add-line"></i> Join Us
+      </a>
+      <a href="#blog" class="sidebar-link" data-page="blog">
+        <i class="ri-lg ri-article-line"></i> Blog
+      </a>
+      <a href="#contact" class="sidebar-link" data-page="contact">
+        <i class="ri-lg ri-mail-line"></i> Contact
+      </a>
+      <div class="sidebar-divider"></div>
+      <a href="https://youtube.com/@stargzr" class="sidebar-link" target="_blank">
+        <i class="ri-lg ri-youtube-line"></i> YouTube
+      </a>
+      <a href="https://discord.gg/stargzr" class="sidebar-link" target="_blank">
+        <i class="ri-lg ri-discord-line"></i> Discord
+      </a>
+    </div>
+  </div>
+
+  <!-- Header Controls -->
+  <div class="header-controls">
+    <button class="header-button" id="theme-toggle" title="Toggle theme">
+      <i class="ri-lg ri-moon-clear-fill"></i>
+    </button>
+    <button class="header-button" id="menu-toggle" title="Menu">
+      <i class="ri-lg ri-menu-2-line"></i>
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    
+    <!-- HOME PAGE -->
+    <div class="page active" id="home">
+      <div class="hero-section">
+        <div class="logo-container">
+          <div class="logo">Stargzr</div>
+        </div>
+        <p class="tagline">For the people who dream big and look beyond.</p>
+        <p>A network for students and dreamers who refuse to be confined by traditional education systems.</p>
+        <div class="cta-buttons">
+          <a href="#projects" class="cta-button" data-page="projects">
+            <i class="ri-rocket-line"></i> Explore Projects
+          </a>
+          <a href="#join" class="cta-button" data-page="join">
+            <i class="ri-user-add-line"></i> Join the Network
+          </a>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>What We Offer</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-video-line"></i></div>
+            <h3>Feynman Files</h3>
+            <p>Educational video series where complex concepts are explained simply, following the Feynman technique. Learn from peers who can teach like no textbook can.</p>
+            <a href="#feynman-files" class="cta-button" data-page="feynman-files" style="margin-top: 1rem;">
+              Watch Videos <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-group-line"></i></div>
+            <h3>Peer Projects</h3>
+            <p>Collaborative student experiments and projects that challenge conventional learning. Work together on real-world problems and creative challenges.</p>
+            <a href="#projects" class="cta-button" data-page="projects" style="margin-top: 1rem;">
+              View Projects <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon"><i class="ri-team-line"></i></div>
+            <h3>Stargzr Network</h3>
+            <p>A community of curious minds who learn, teach, and collaborate beyond the classroom. Connect with mentors and fellow dreamers.</p>
+            <a href="#join" class="cta-button" data-page="join" style="margin-top: 1rem;">
+              Join Now <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>What Our Members Say</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <p>"Stargzr gave me the freedom to explore topics I'm truly passionate about, without the constraints of a rigid curriculum."</p>
+            <p style="opacity: 0.6; margin-top: 1rem;">— Sarah K., Physics Enthusiast</p>
+          </div>
+          <div class="feature-card">
+            <p>"The community here is incredible. I've learned more from my peers in three months than I did in a year of traditional classes."</p>
+            <p style="opacity: 0.6; margin-top: 1rem;">— Rafi M., Computer Science Student</p>
+          </div>
+          <div class="feature-card">
+            <p>"Finally, a place where asking questions is encouraged and curiosity is celebrated, not stifled."</p>
+            <p style="opacity: 0.6; margin-top: 1rem;">— Priya D., Astronomy Lover</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div class="page" id="about">
+      <section class="section">
+        <h2>About Stargzr</h2>
+        <div class="about-content">
+          <p>Stargzr is a network of curious minds who dream, learn, teach, and collaborate beyond the classroom. We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery.</p>
+          
+          <p>Born from a simple idea that students learn best when they're genuinely curious and engaged, Stargzr has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
+          
+          <p>We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
+
+          <div class="founder-note">
+            <h3>Founder's Note</h3>
+            <p>Stargzr started as a small astronomy club in Bogura, where a few of us would gather to talk about the stars, the universe, and everything in between. What began as casual stargazing sessions evolved into something much bigger — a movement of students who wanted to learn on their own terms.</p>
+            <p>Today, Stargzr is more than just astronomy. It's a philosophy: the belief that curiosity should drive education, that knowledge should be accessible to all, and that the best teachers are often our peers. I invite you to join us on this journey of exploration and discovery.</p>
+            <p style="margin-top: 1rem;"><strong>— Himel Das, Founder</strong></p>
+          </div>
+
+          <h3>Our Philosophy</h3>
+          <p><strong>Curiosity:</strong> We believe that genuine curiosity is the foundation of all learning.</p>
+          <p><strong>Exploration:</strong> Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
+          <p><strong>Collaboration:</strong> The best learning happens when we work together, share knowledge, and teach each other.</p>
+          <p><strong>Independence:</strong> We empower members to learn independently and pursue their own interests.</p>
+          <p><strong>Rebellion:</strong> We challenge conventional education systems and create new ways of learning.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- PROJECTS PAGE -->
+    <div class="page" id="projects">
+      <section class="section">
+        <h2>Projects</h2>
+        <p>Collaborative experiments, research initiatives, and creative projects from our community members.</p>
+        
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image"><i class="ri-telescope-line"></i></div>
+            <h3>DIY Radio Telescope</h3>
+            <p>Building a functional radio telescope to detect cosmic microwave background radiation using affordable materials.</p>
+            <div class="project-tags">
+              <span class="tag">Astronomy</span>
+              <span class="tag">DIY</span>
+              <span class="tag">In Progress</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"><i class="ri-rocket-line"></i></div>
+            <h3>Model Rocket Program</h3>
+            <p>Designing, building, and launching model rockets to understand principles of aerodynamics and propulsion.</p>
+            <div class="project-tags">
+              <span class="tag">Physics</span>
+              <span class="tag">Engineering</span>
+              <span class="tag">Active</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"><i class="ri-code-line"></i></div>
+            <h3>Open Source Education Platform</h3>
+            <p>Developing a web platform for peer-to-peer learning and knowledge sharing, built entirely by students.</p>
+            <div class="project-tags">
+              <span class="tag">Programming</span>
+              <span class="tag">Web Dev</span>
+              <span class="tag">Planning</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"><i class="ri-flask-line"></i></div>
+            <h3>Chemistry Visualization App</h3>
+            <p>Interactive mobile app to visualize molecular structures and chemical reactions in 3D.</p>
+            <div class="project-tags">
+              <span class="tag">Chemistry</span>
+              <span class="tag">App Development</span>
+              <span class="tag">In Progress</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"><i class="ri-planet-line"></i></div>
+            <h3>Exoplanet Data Analysis</h3>
+            <p>Analyzing open-source data from NASA to identify patterns in exoplanet discoveries and their habitability.</p>
+            <div class="project-tags">
+              <span class="tag">Data Science</span>
+              <span class="tag">Astronomy</span>
+              <span class="tag">Completed</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image"><i class="ri-book-open-line"></i></div>
+            <h3>Philosophy Discussion Series</h3>
+            <p>Weekly discussions exploring philosophical questions about science, ethics, and the nature of knowledge.</p>
+            <div class="project-tags">
+              <span class="tag">Philosophy</span>
+              <span class="tag">Discussion</span>
+              <span class="tag">Ongoing</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="#join" class="cta-button" data-page="join">
+            <i class="ri-lightbulb-line"></i> Submit Your Project Idea
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- FEYNMAN FILES PAGE -->
+    <div class="page" id="feynman-files">
+      <section class="section">
+        <h2>Feynman Files</h2>
+        <p>Educational videos where complex topics are explained simply. Learn from peers who understand the struggle of learning.</p>
+        
+        <div class="filter-buttons">
+          <button class="filter-button active" data-filter="all">All Topics</button>
+          <button class="filter-button" data-filter="physics">Physics</button>
+          <button class="filter-button" data-filter="math">Mathematics</button>
+          <button class="filter-button" data-filter="cs">Computer Science</button>
+          <button class="filter-button" data-filter="astro">Astronomy</button>
+        </div>
+
+        <div class="videos-grid">
+          <div class="video-card" data-category="physics">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">Quantum Mechanics Explained</div>
+              <p>Understanding the basics of quantum mechanics through everyday analogies.</p>
+              <div class="project-tags">
+                <span class="tag">Physics</span>
+                <span class="tag">15 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" data-category="math">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">Calculus Intuition</div>
+              <p>Building an intuitive understanding of derivatives and integrals.</p>
+              <div class="project-tags">
+                <span class="tag">Mathematics</span>
+                <span class="tag">20 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" data-category="cs">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">How Computers Think</div>
+              <p>From binary to algorithms: demystifying computer science fundamentals.</p>
+              <div class="project-tags">
+                <span class="tag">Computer Science</span>
+                <span class="tag">18 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" data-category="astro">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">Black Holes Simplified</div>
+              <p>What happens when gravity becomes so strong that nothing can escape?</p>
+              <div class="project-tags">
+                <span class="tag">Astronomy</span>
+                <span class="tag">12 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" data-category="physics">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">Relativity for Beginners</div>
+              <p>Einstein's theory of relativity explained without complex math.</p>
+              <div class="project-tags">
+                <span class="tag">Physics</span>
+                <span class="tag">25 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" data-category="math">
+            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+            <div class="video-info">
+              <div class="video-title">The Beauty of Pi</div>
+              <p>Exploring the mysterious constant that appears everywhere in nature.</p>
+              <div class="project-tags">
+                <span class="tag">Mathematics</span>
+                <span class="tag">10 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="#join" class="cta-button" data-page="join">
+            <i class="ri-video-add-line"></i> Submit Your Own Video
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- JOIN US PAGE -->
+    <div class="page" id="join">
+      <section class="section">
+        <h2>Join Stargzr</h2>
+        <div class="about-content">
+          <p>Ready to join a community of curious minds? Whether you want to learn, teach, collaborate, or simply explore your interests, Stargzr welcomes you.</p>
+          <p>Fill out the form below to become part of our network. No prerequisites, no requirements — just curiosity and passion.</p>
+        </div>
+
+        <div class="form-container">
+          <form id="join-form">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Your full name">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="interest">Area of Interest *</label>
+              <select id="interest" name="interest" required>
+                <option value="">Select your primary interest</option>
+                <option value="physics">Physics</option>
+                <option value="astronomy">Astronomy</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="computer-science">Computer Science</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="philosophy">Philosophy</option>
+                <option value="engineering">Engineering</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="motivation">Why do you want to join Stargzr? *</label>
+              <textarea id="motivation" name="motivation" required placeholder="Tell us what drives your curiosity and what you hope to achieve with Stargzr..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="contribution">How would you like to contribute?</label>
+              <textarea id="contribution" name="contribution" placeholder="Would you like to teach, learn, work on projects, create content, or something else?"></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">
+              <i class="ri-user-add-line"></i> Join Stargzr
+            </button>
+          </form>
+
+          <p style="text-align: center; margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+            By joining, you agree to our community guidelines of respect, curiosity, and collaborative learning.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- BLOG PAGE -->
+    <div class="page" id="blog">
+      <section class="section">
+        <h2>Blog & Articles</h2>
+        <p>Thoughts, discoveries, and stories from the Stargzr community.</p>
+
+        <div class="articles-grid">
+          <a href="#" class="article-card">
+            <h3>The Problem with Traditional Education</h3>
+            <p class="article-excerpt">Why memorization-based learning fails to inspire genuine curiosity and how we can do better.</p>
+            <div class="project-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Philosophy</span>
+            </div>
+            <p class="article-meta">By Himel Das • October 15, 2025</p>
+          </a>
+
+          <a href="#" class="article-card">
+            <h3>Learning by Teaching: The Feynman Technique</h3>
+            <p class="article-excerpt">How explaining concepts to others is the most effective way to truly understand them.</p>
+            <div class="project-tags">
+              <span class="tag">Learning</span>
+              <span class="tag">Methods</span>
+            </div>
+            <p class="article-meta">By Sarah K. • October 10, 2025</p>
+          </a>
+
+          <a href="#" class="article-card">
+            <h3>Building a Telescope from Scratch</h3>
+            <p class="article-excerpt">A step-by-step guide to constructing your own Newtonian telescope with household materials.</p>
+            <div class="project-tags">
+              <span class="tag">DIY</span>
+              <span class="tag">Astronomy</span>
+            </div>
+            <p class="article-meta">By Rafi M. • October 5, 2025</p>
+          </a>
+
+          <a href="#" class="article-card">
+            <h3>Why Peer Learning Works</h3>
+            <p class="article-excerpt">Research and personal experiences showing why learning from peers is more effective than traditional lectures.</p>
+            <div class="project-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Research</span>
+            </div>
+            <p class="article-meta">By Priya D. • September 28, 2025</p>
+          </a>
+
+          <a href="#" class="article-card">
+            <h3>The Joy of Independent Research</h3>
+            <p class="article-excerpt">How pursuing your own research questions can be more rewarding than following a curriculum.</p>
+            <div class="project-tags">
+              <span class="tag">Research</span>
+              <span class="tag">Inspiration</span>
+            </div>
+            <p class="article-meta">By Ahmad T. • September 20, 2025</p>
+          </a>
+
+          <a href="#" class="article-card">
+            <h3>From Stargazing to Stargzr</h3>
+            <p class="article-excerpt">The origin story of Stargzr and how a small astronomy club became a learning movement.</p>
+            <div class="project-tags">
+              <span class="tag">Story</span>
+              <span class="tag">Community</span>
+            </div>
+            <p class="article-meta">By Himel Das • September 15, 2025</p>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div class="page" id="contact">
+      <section class="section">
+        <h2>Contact Us</h2>
+        <div class="about-content">
+          <p>Have questions? Want to collaborate? Interested in bringing Stargzr to your city? We'd love to hear from you.</p>
+        </div>
+
+        <div class="form-container">
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="contact-name">Name *</label>
+              <input type="text" id="contact-name" name="name" required placeholder="Your name">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email *</label>
+              <input type="email" id="contact-email" name="email" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-button">
+              <i class="ri-send-plane-line"></i> Send Message
+            </button>
+          </form>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 3rem;">Connect With Us</h3>
+        <div class="contact-methods">
+          <a href="mailto:hello@stargzr.org" class="contact-button">
+            <i class="ri-mail-line"></i> Email
+          </a>
+          <a href="https://youtube.com/@stargzr" class="contact-button" target="_blank">
+            <i class="ri-youtube-line"></i> YouTube
+          </a>
+          <a href="https://discord.gg/stargzr" class="contact-button" target="_blank">
+            <i class="ri-discord-line"></i> Discord
+          </a>
+          <a href="https://instagram.com/stargzr" class="contact-button" target="_blank">
+            <i class="ri-instagram-line"></i> Instagram
+          </a>
+          <a href="https://t.me/stargzr" class="contact-button" target="_blank">
+            <i class="ri-telegram-line"></i> Telegram
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-links">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#about" data-page="about">About</a>
+        <a href="#projects" data-page="projects">Projects</a>
+        <a href="#join" data-page="join">Join Us</a>
+        <a href="#contact" data-page="contact">Contact</a>
+      </div>
+      <p>&copy; 2025 Stargzr - Founded by Himel Das</p>
+      <p style="margin-top: 0.5rem;">For the people who dream big and look beyond.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme handling
+    const getPreferredTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) return savedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      const themeIcons = document.querySelectorAll('#theme-toggle i, #theme-toggle-sidebar i');
+      themeIcons.forEach(icon => {
+        icon.className = theme === 'dark' ? 'ri-lg ri-sun-fill' : 'ri-lg ri-moon-clear-fill';
+      });
+    };
+
+    const toggleTheme = () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
+      applyTheme(newTheme);
+    };
+
+    // Create stars
+    function createStars() {
+      const spaceContainer = document.getElementById('space-container');
+      if (!spaceContainer) return;
+      
+      spaceContainer.innerHTML = '';
+      const starSizes = ['small', 'medium', 'large'];
+      
+      for (let i = 0; i < 70; i++) {
+        const star = document.createElement('div');
+        star.classList.add('space-element', 'star');
+        const sizeClass = starSizes[Math.floor(Math.random() * starSizes.length)];
+        star.classList.add(sizeClass);
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        spaceContainer.appendChild(star);
+      }
+      
+      const planet = document.createElement('div');
+      planet.classList.add('space-element', 'planet');
+      planet.style.left = '75%';
+      planet.style.top = '20%';
+      planet.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+      spaceContainer.appendChild(planet);
+    }
+
+    // Parallax effect
+    function initParallaxEffect() {
+      const stars = document.querySelectorAll('.star');
+      const planet = document.querySelector('.planet');
+      
+      if (!stars.length) return;
+      
+      function updatePlanetVisibility() {
+        if (planet) {
+          planet.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+        }
+      }
+      
+      updatePlanetVisibility();
+      window.addEventListener('resize', updatePlanetVisibility);
+      
+      if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+          const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          const mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+          
+          stars.forEach((star) => {
+            let depth = 0.5;
+            if (star.classList.contains('small')) depth = 0.3;
+            if (star.classList.contains('medium')) depth = 0.5;
+            if (star.classList.contains('large')) depth = 0.7;
+            
+            const moveX = -mouseX * depth * 50;
+            const moveY = -mouseY * depth * 50;
+            star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+          });
+        });
+      } else {
+        if (window.DeviceOrientationEvent) {
+          window.addEventListener('deviceorientation', (e) => {
+            const tiltX = e.beta ? (e.beta - 45) * 0.5 : 0;
+            const tiltY = e.gamma ? e.gamma * 0.5 : 0;
+            
+            stars.forEach((star) => {
+              let depth = 0.5;
+              if (star.classList.contains('small')) depth = 0.2;
+              if (star.classList.contains('medium')) depth = 0.4;
+              if (star.classList.contains('large')) depth = 0.6;
+              
+              const moveX = tiltY * depth * 3;
+              const moveY = tiltX * depth * 3;
+              star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+            
+            if (planet && window.innerWidth <= 768) {
+              const planetMoveX = -tiltY * 0.8 * 2;
+              const planetMoveY = -tiltX * 0.8 * 2;
+              planet.style.transform = `translate(${planetMoveX}px, ${planetMoveY}px)`;
+            }
+          });
+        }
+      }
+    }
+
+    // Page navigation
+    function navigateToPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+      
+      // Close sidebar if open
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+      applyTheme(getPreferredTheme());
+      
+      // Theme toggles
+      document.querySelectorAll('#theme-toggle, #theme-toggle-sidebar').forEach(button => {
+        button.addEventListener('click', toggleTheme);
+      });
+      
+      // Sidebar
+      const menuToggle = document.getElementById('menu-toggle');
+      const sidebar = document.getElementById('sidebar');
+      const sidebarCollapse = document.getElementById('sidebar-collapse');
+      const overlay = document.getElementById('overlay');
+      
+      menuToggle.addEventListener('click', () => {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+      
+      sidebarCollapse.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      
+      // Navigation links
+      document.querySelectorAll('[data-page]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const pageId = link.getAttribute('data-page');
+          navigateToPage(pageId);
+          window.location.hash = pageId;
+        });
+      });
+      
+      // Handle initial hash
+      const initialHash = window.location.hash.slice(1);
+      if (initialHash && document.getElementById(initialHash)) {
+        navigateToPage(initialHash);
+      }
+      
+      // Video filter
+      const filterButtons = document.querySelectorAll('.filter-button');
+      const videoCards = document.querySelectorAll('.video-card');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          const filter = button.getAttribute('data-filter');
+          
+          videoCards.forEach(card => {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Form submissions
+      document.getElementById('join-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your interest in joining Stargzr! We will contact you soon.');
+        e.target.reset();
+      });
+      
+      document.getElementById('contact-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your message! We will get back to you soon.');
+        e.target.reset();
+      });
+      
+      // Create space elements
+      createStars();
+      setTimeout(initParallaxEffect, 100);
+    });
+  </script>
+</body>
+</html>
