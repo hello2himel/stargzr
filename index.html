@@ -452,6 +452,11 @@
       animation: bounce 2s infinite;
       opacity: 0.5;
       cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .scroll-indicator:hover {
+      opacity: 0.8;
     }
 
     @keyframes bounce {
@@ -464,6 +469,18 @@
       60% {
         transform: translateX(-50%) translateY(-5px);
       }
+    }
+
+    /* Hero section needs relative positioning for scroll indicator */
+    .hero-section {
+      position: relative;
+    }
+
+    /* Philosophy cards hover effect */
+    .philosophy-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* Section Container */
@@ -1184,30 +1201,41 @@
       <div style="line-height: 1.8; font-size: 1.05rem;">
         <p style="margin-bottom: 1.5rem;">We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery. Born from a simple idea that students learn best when they're genuinely curious and engaged, STΛRGZR has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
         
-        <p style="margin-bottom: 1.5rem;">We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
+        <p style="margin-bottom: 2rem;">We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
 
-        <h3 style="font-size: 1.5rem; margin: 2.5rem 0 1.5rem; font-weight: 600;">Our Philosophy</h3>
+        <div style="text-align: center; margin: 2.5rem 0;">
+          <a href="/res/doc/whitepaper.pdf" class="cta-button" download style="display: inline-flex;">
+            <i class="ri-file-text-line"></i> Download Whitepaper
+          </a>
+        </div>
+
+        <h3 style="font-size: 1.5rem; margin: 2.5rem 0 1.5rem; font-weight: 600; text-align: center;">Our Philosophy</h3>
         
-        <div style="display: grid; gap: 1.5rem;">
-          <div>
-            <strong style="font-size: 1.1rem;">Curiosity</strong>
-            <p style="opacity: 0.8; margin-top: 0.5rem;">We believe that genuine curiosity is the foundation of all learning.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+          <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; transition: all 0.3s;" class="philosophy-card">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6;"><i class="ri-search-line"></i></div>
+            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">Curiosity</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem; font-size: 0.95rem;">We believe that genuine curiosity is the foundation of all learning.</p>
           </div>
-          <div>
-            <strong style="font-size: 1.1rem;">Exploration</strong>
-            <p style="opacity: 0.8; margin-top: 0.5rem;">Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
+          <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; transition: all 0.3s;" class="philosophy-card">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6;"><i class="ri-rocket-line"></i></div>
+            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">Exploration</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem; font-size: 0.95rem;">Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
           </div>
-          <div>
-            <strong style="font-size: 1.1rem;">Collaboration</strong>
-            <p style="opacity: 0.8; margin-top: 0.5rem;">The best learning happens when we work together, share knowledge, and teach each other.</p>
+          <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; transition: all 0.3s;" class="philosophy-card">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6;"><i class="ri-team-line"></i></div>
+            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">Collaboration</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem; font-size: 0.95rem;">The best learning happens when we work together, share knowledge, and teach each other.</p>
           </div>
-          <div>
-            <strong style="font-size: 1.1rem;">Independence</strong>
-            <p style="opacity: 0.8; margin-top: 0.5rem;">We empower members to learn independently and pursue their own interests.</p>
+          <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; transition: all 0.3s;" class="philosophy-card">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6;"><i class="ri-lightbulb-line"></i></div>
+            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">Independence</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem; font-size: 0.95rem;">We empower members to learn independently and pursue their own interests.</p>
           </div>
-          <div>
-            <strong style="font-size: 1.1rem;">Rebellion</strong>
-            <p style="opacity: 0.8; margin-top: 0.5rem;">We challenge conventional education systems and create new ways of learning.</p>
+          <div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; transition: all 0.3s;" class="philosophy-card">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.6;"><i class="ri-flashlight-line"></i></div>
+            <strong style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">Rebellion</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem; font-size: 0.95rem;">We challenge conventional education systems and create new ways of learning.</p>
           </div>
         </div>
       </div>
@@ -1468,7 +1496,8 @@
         <p class="section-subtitle">Thoughts, discoveries, and stories from the STΛRGZR community.</p>
       </div>
 
-      <div class="articles-grid">
+      <div class="articles-grid" id="blog-feed">
+        <!-- Blog posts will be dynamically loaded here -->
         <a href="#" class="article-card">
           <h3 class="article-title">The Problem with Traditional Education</h3>
           <p class="article-excerpt">Why memorization-based learning fails to inspire genuine curiosity and how we can do better.</p>
@@ -1509,7 +1538,7 @@
           <p class="article-meta">September 28, 2025</p>
         </a>
 
-        <div class="article-card">
+        <a href="#" class="article-card">
           <h3 class="article-title">The Joy of Independent Research</h3>
           <p class="article-excerpt">How pursuing your own research questions can be more rewarding than following a curriculum.</p>
           <div class="project-tags">
@@ -1527,6 +1556,12 @@
             <span class="tag">Community</span>
           </div>
           <p class="article-meta">September 15, 2025</p>
+        </a>
+      </div>
+      
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/blog/" class="cta-button">
+          <i class="ri-arrow-right-line"></i> View All Articles
         </a>
       </div>
     </section>
@@ -1852,7 +1887,44 @@
           }
         }, 100);
       }
+
+      // Load blog posts from Hugo (if available)
+      loadBlogPosts();
     });
+
+    // Load blog posts from Hugo JSON
+    function loadBlogPosts() {
+      fetch('/blog/index.json')
+        .then(r => {
+          if (!r.ok) throw new Error('Blog not available');
+          return r.json();
+        })
+        .then(posts => {
+          const container = document.querySelector('#blog-feed');
+          if (!posts || posts.length === 0) return;
+          
+          // Clear placeholder content
+          container.innerHTML = '';
+          
+          // Show first 6 posts
+          posts.slice(0, 6).forEach(post => {
+            const tags = post.tags || [];
+            const tagsHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            
+            container.innerHTML += `
+              <a href="${post.permalink}" class="article-card">
+                <h3 class="article-title">${post.title}</h3>
+                <p class="article-excerpt">${post.summary || post.description || ''}</p>
+                ${tagsHTML ? `<div class="project-tags">${tagsHTML}</div>` : ''}
+                <p class="article-meta">${post.date ? new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</p>
+              </a>
+            `;
+          });
+        })
+        .catch(err => {
+          console.log('Blog posts not available yet, showing placeholder content');
+        });
+    }
 
     // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
