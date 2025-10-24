@@ -18,7 +18,8 @@
       --card-hover-border: #555;
       --tag-bg: #222;
       --overlay-bg: rgba(0, 0, 0, 0.8);
-      --sidebar-width: 250px;
+      --sidebar-width: 280px;
+      --accent-color: #FFD54F;
     }
 
     [data-theme="light"] {
@@ -29,16 +30,22 @@
       --card-hover-border: #999;
       --tag-bg: #e9e9e9;
       --overlay-bg: rgba(255, 255, 255, 0.95);
+      --accent-color: #FFC107;
     }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
     }
 
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
@@ -109,17 +116,84 @@
       50% { opacity: 0.7; }
     }
 
-    /* Header Controls */
-    .header-controls {
+    /* Fixed Navigation Bar */
+    .nav-bar {
       position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
       display: flex;
-      gap: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
       z-index: 900;
+      backdrop-filter: blur(10px);
+      background: rgba(10, 10, 10, 0.95);
     }
 
-    .header-button {
+    [data-theme="light"] .nav-bar {
+      background: rgba(245, 245, 245, 0.95);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .nav-logo:hover {
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+      position: relative;
+      padding: 0.25rem 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      opacity: 0.8;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .nav-button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -133,16 +207,41 @@
       transition: all 0.2s;
     }
 
-    .header-button:hover {
-      transform: translateY(-3px);
+    .nav-button:hover {
+      transform: translateY(-2px);
       border-color: var(--card-hover-border);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      border-color: var(--card-hover-border);
+    }
+
+    .mobile-menu-toggle {
+      display: none;
     }
 
     /* Sidebar */
     .sidebar {
       position: fixed;
       top: 0;
-      right: -300px;
+      right: -320px;
       width: var(--sidebar-width);
       height: 100vh;
       background: var(--bg-color);
@@ -157,13 +256,23 @@
       right: 0;
     }
 
-    .sidebar-controls {
+    .sidebar-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .sidebar-button {
+    .sidebar-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    .sidebar-close {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       width: 36px;
@@ -177,38 +286,49 @@
       transition: all 0.2s;
     }
 
-    .sidebar-button:hover {
+    .sidebar-close:hover {
       border-color: var(--card-hover-border);
-      transform: translateY(-2px);
+      transform: rotate(90deg);
     }
 
     .sidebar-menu {
-      margin-top: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
     }
 
     .sidebar-link {
       padding: 0.75rem 1rem;
-      border-radius: 4px;
+      border-radius: 6px;
       color: var(--text-color);
       text-decoration: none;
-      transition: background 0.2s;
+      transition: all 0.2s;
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
-    .sidebar-link:hover {
+    .sidebar-link:hover,
+    .sidebar-link.active {
       background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      margin: -1px;
     }
 
     .sidebar-divider {
       height: 1px;
       background: var(--border-color);
       margin: 1rem 0;
+    }
+
+    .sidebar-social-title {
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     /* Overlay */
@@ -232,38 +352,62 @@
 
     /* Main Layout */
     .main-container {
-      padding: 2rem;
-      padding-top: 5rem;
-      max-width: 1400px;
-      margin: 0 auto;
+      padding-top: 70px;
       width: 100%;
     }
 
     /* Hero Section */
     .hero-section {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .logo-container {
       margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 900;
       letter-spacing: 0.15em;
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
+      margin-bottom: 1rem;
     }
 
     .tagline {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       opacity: 0.85;
-      margin-bottom: 2rem;
-      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s ease-out 0.4s backwards;
     }
 
     .cta-buttons {
@@ -271,14 +415,14 @@
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
-      margin-top: 2rem;
+      animation: fadeInUp 0.8s ease-out 0.6s backwards;
     }
 
     .cta-button {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.9rem 1.8rem;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 6px;
@@ -286,42 +430,82 @@
       text-decoration: none;
       transition: all 0.2s;
       font-weight: 500;
+      font-size: 1rem;
+    }
+
+    .cta-button.primary {
+      background: var(--text-color);
+      color: var(--bg-color);
+      border-color: var(--text-color);
     }
 
     .cta-button:hover {
       transform: translateY(-3px);
-      border-color: var(--card-hover-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    /* Typography */
-    h1 {
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      opacity: 0.5;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    /* Section Container */
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-container.narrow {
+      max-width: 900px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
       font-size: 2.5rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin: 2.5rem 0 1rem;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.5rem;
-    }
-
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
       margin-bottom: 1rem;
-      opacity: 0.85;
+      position: relative;
+      display: inline-block;
     }
 
-    /* Sections */
-    .section {
-      margin-bottom: 3rem;
-      max-width: 1200px;
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--accent-color);
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      margin-top: 1.5rem;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -329,62 +513,102 @@
     /* Feature Cards */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
     .feature-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 2rem;
-      border-radius: 6px;
-      transition: all 0.2s;
+      padding: 2.5rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+      text-align: center;
     }
 
     .feature-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: var(--card-hover-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .feature-icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .feature-title {
+      font-size: 1.4rem;
+      font-weight: 600;
       margin-bottom: 1rem;
+    }
+
+    .feature-description {
+      opacity: 0.8;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
     }
 
     /* Project Cards */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
     .project-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      border-radius: 6px;
-      transition: all 0.2s;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
       display: flex;
       flex-direction: column;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: var(--card-hover-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .project-image {
       width: 100%;
-      height: 180px;
+      height: 200px;
       background: var(--tag-bg);
-      border-radius: 4px;
-      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      opacity: 0.3;
+      font-size: 3.5rem;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .project-image {
+      opacity: 0.6;
+    }
+
+    .project-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-description {
+      opacity: 0.8;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1rem;
     }
 
     .project-tags {
@@ -392,145 +616,220 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: auto;
-      padding-top: 1rem;
     }
 
     .tag {
       display: inline-block;
       background: var(--tag-bg);
-      padding: 0.3rem 0.8rem;
+      padding: 0.4rem 0.9rem;
       border-radius: 4px;
       font-size: 0.85rem;
       border: 1px solid var(--border-color);
+      white-space: nowrap;
     }
 
     /* Video Cards */
     .videos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
     .video-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
-      transition: all 0.2s;
+      transition: all 0.3s;
+      cursor: pointer;
     }
 
     .video-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: var(--card-hover-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .video-thumbnail {
       width: 100%;
-      height: 160px;
+      height: 180px;
       background: var(--tag-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      opacity: 0.3;
+      font-size: 3.5rem;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+      position: relative;
+    }
+
+    .video-card:hover .video-thumbnail {
+      opacity: 0.6;
     }
 
     .video-info {
-      padding: 1rem;
+      padding: 1.5rem;
     }
 
     .video-title {
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .video-description {
+      opacity: 0.8;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    /* Filter Buttons */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .filter-button {
+      padding: 0.6rem 1.2rem;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      border-color: var(--card-hover-border);
+      background: var(--tag-bg);
+      transform: translateY(-2px);
     }
 
     /* Form Styling */
     .form-container {
       max-width: 600px;
-      margin: 2rem auto;
+      margin: 3rem auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 2.5rem;
+      border-radius: 8px;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
 
     label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       font-weight: 500;
+      font-size: 0.95rem;
     }
 
     input, textarea, select {
       width: 100%;
-      padding: 0.75rem;
-      background: var(--card-bg);
+      padding: 0.9rem;
+      background: var(--bg-color);
       border: 1px solid var(--border-color);
-      border-radius: 4px;
+      border-radius: 6px;
       color: var(--text-color);
       font-family: inherit;
       font-size: 1rem;
-      transition: border-color 0.2s;
+      transition: all 0.2s;
     }
 
     input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--card-hover-border);
+      box-shadow: 0 0 0 3px rgba(255, 213, 79, 0.1);
     }
 
     textarea {
       resize: vertical;
-      min-height: 120px;
+      min-height: 130px;
+      line-height: 1.6;
     }
 
     .submit-button {
       width: 100%;
-      padding: 0.75rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
+      padding: 1rem;
+      background: var(--text-color);
+      color: var(--bg-color);
+      border: none;
       border-radius: 6px;
-      color: var(--text-color);
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
       font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
 
     .submit-button:hover {
       transform: translateY(-2px);
-      border-color: var(--card-hover-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     /* Article Cards */
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
     }
 
     .article-card {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      border-radius: 6px;
-      transition: all 0.2s;
+      padding: 2rem;
+      border-radius: 8px;
+      transition: all 0.3s;
       text-decoration: none;
       color: var(--text-color);
       display: block;
     }
 
     .article-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-8px);
       border-color: var(--card-hover-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .article-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-excerpt {
+      opacity: 0.8;
+      line-height: 1.7;
+      margin: 1rem 0 1.25rem;
     }
 
     .article-meta {
       font-size: 0.85rem;
       opacity: 0.6;
-      margin-top: 0.5rem;
-    }
-
-    .article-excerpt {
-      margin: 1rem 0;
+      margin-top: 1rem;
     }
 
     /* Contact Section */
@@ -538,15 +837,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 3rem;
       justify-content: center;
     }
 
     .contact-button {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
+      gap: 0.6rem;
+      padding: 0.9rem 1.5rem;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 6px;
@@ -559,88 +858,88 @@
     .contact-button:hover {
       transform: translateY(-3px);
       border-color: var(--card-hover-border);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 4rem;
-      padding: 2rem;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-color);
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-
-    .footer-links a:hover {
-      opacity: 1;
-    }
-
-    /* Filter Buttons */
-    .filter-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .filter-button {
-      padding: 0.5rem 1rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-color);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.9rem;
-    }
-
-    .filter-button:hover, .filter-button.active {
-      border-color: var(--card-hover-border);
-      background: var(--tag-bg);
-    }
-
-    /* About Section Specific */
-    .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    .founder-note {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 2rem;
-      border-radius: 6px;
-      margin: 2rem 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     /* Development Notice */
     .dev-notice {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      border-radius: 6px;
+      padding: 2rem;
+      border-radius: 8px;
       text-align: center;
-      margin: 2rem 0;
+      margin: 2rem auto;
+      max-width: 500px;
+      opacity: 0.8;
+    }
+
+    .dev-notice i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+      opacity: 0.6;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-color);
+      text-decoration: none;
       opacity: 0.7;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      opacity: 0.6;
+      font-size: 0.9rem;
+      line-height: 1.8;
     }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+
     @media (min-width: 769px) {
       .planet {
         display: none !important;
@@ -651,9 +950,22 @@
       .planet {
         display: block !important;
       }
+
+      .nav-bar {
+        padding: 0 1rem;
+      }
+
+      .nav-logo {
+        font-size: 1.2rem;
+      }
+
+      .nav-cta {
+        display: none;
+      }
       
       .hero-section {
-        padding: 3rem 1rem;
+        padding: 3rem 1.5rem;
+        min-height: calc(100vh - 70px);
       }
 
       .logo {
@@ -661,24 +973,19 @@
       }
 
       .tagline {
-        font-size: 1.2rem;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      h2 {
         font-size: 1.3rem;
       }
 
-      .cta-buttons {
-        flex-direction: column;
+      .hero-description {
+        font-size: 1rem;
       }
 
-      .cta-button {
-        width: 100%;
-        justify-content: center;
+      .section-container {
+        padding: 3rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
       }
 
       .features-grid,
@@ -686,12 +993,33 @@
       .videos-grid,
       .articles-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
       }
 
-      .main-container {
-        padding: 1.5rem;
-        padding-top: 4rem;
+      .form-container {
+        padding: 2rem 1.5rem;
+        margin: 2rem 1rem;
       }
+
+      .footer-links {
+        gap: 1.5rem;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+    .loading {
+      animation: shimmer 2s infinite;
+      background: linear-gradient(to right, var(--card-bg) 4%, var(--tag-bg) 25%, var(--card-bg) 36%);
+      background-size: 1000px 100%;
     }
   </style>
 </head>
@@ -703,14 +1031,36 @@
   <!-- Overlay -->
   <div class="overlay" id="overlay"></div>
   
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-controls">
-      <button class="sidebar-button" id="theme-toggle-sidebar" title="Toggle theme">
+  <!-- Navigation Bar -->
+  <nav class="nav-bar">
+    <div class="nav-logo" onclick="scrollToTop()">STΛRGZR</div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active" data-nav="home">Home</a>
+      <a href="#about" class="nav-link" data-nav="about">About</a>
+      <a href="#projects" class="nav-link" data-nav="projects">Projects</a>
+      <a href="#feynman-files" class="nav-link" data-nav="feynman-files">Feynman Files</a>
+      <a href="#blog" class="nav-link" data-nav="blog">Blog</a>
+      <a href="#contact" class="nav-link" data-nav="contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="#join" class="nav-cta">
+        <i class="ri-user-add-line"></i> Join Us
+      </a>
+      <button class="nav-button" id="theme-toggle" title="Toggle theme">
         <i class="ri-lg ri-moon-clear-fill"></i>
       </button>
-      <button class="sidebar-button" id="sidebar-collapse" title="Collapse sidebar">
-        <i class="ri-lg ri-arrow-right-s-line"></i>
+      <button class="nav-button mobile-menu-toggle" id="menu-toggle" title="Menu">
+        <i class="ri-lg ri-menu-2-line"></i>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">STΛRGZR</div>
+      <button class="sidebar-close" id="sidebar-close">
+        <i class="ri-lg ri-close-line"></i>
       </button>
     </div>
     <div class="sidebar-menu">
@@ -735,198 +1085,243 @@
       <a href="#contact" class="sidebar-link">
         <i class="ri-lg ri-mail-line"></i> Contact
       </a>
-      <div class="sidebar-divider"></div>
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-social-title">Connect With Us</div>
+    <div class="sidebar-menu">
       <a href="https://youtube.com/@stargzr" class="sidebar-link" target="_blank">
         <i class="ri-lg ri-youtube-line"></i> YouTube
       </a>
       <a href="https://discord.gg/stargzr" class="sidebar-link" target="_blank">
         <i class="ri-lg ri-discord-line"></i> Discord
       </a>
+      <a href="https://instagram.com/stargzr" class="sidebar-link" target="_blank">
+        <i class="ri-lg ri-instagram-line"></i> Instagram
+      </a>
+      <a href="https://t.me/stargzr" class="sidebar-link" target="_blank">
+        <i class="ri-lg ri-telegram-line"></i> Telegram
+      </a>
     </div>
-  </div>
-
-  <!-- Header Controls -->
-  <div class="header-controls">
-    <button class="header-button" id="theme-toggle" title="Toggle theme">
-      <i class="ri-lg ri-moon-clear-fill"></i>
-    </button>
-    <button class="header-button" id="menu-toggle" title="Menu">
-      <i class="ri-lg ri-menu-2-line"></i>
-    </button>
   </div>
 
   <!-- Main Container -->
   <div class="main-container">
     
-    <!-- HOME SECTION -->
-    <div id="home">
-      <div class="hero-section">
-        <div class="logo-container">
-          <div class="logo">STΛRGZR</div>
-        </div>
-        <p class="tagline">For the people who dream big and look beyond.</p>
-        <p>A network for students and dreamers who refuse to be confined by traditional education systems.</p>
-        <div class="cta-buttons">
-          <a href="#projects" class="cta-button">
-            <i class="ri-rocket-line"></i> Explore Projects
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="logo-container">
+        <div class="logo">STΛRGZR</div>
+      </div>
+      <p class="tagline">For the people who dream big and look beyond.</p>
+      <p class="hero-description">A network for students and dreamers who refuse to be confined by traditional education systems. Join a community of curious minds learning, teaching, and collaborating beyond the classroom.</p>
+      <div class="cta-buttons">
+        <a href="#join" class="cta-button primary">
+          <i class="ri-user-add-line"></i> Join the Network
+        </a>
+        <a href="#projects" class="cta-button">
+          <i class="ri-rocket-line"></i> Explore Projects
+        </a>
+      </div>
+      <div class="scroll-indicator" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+        <i class="ri-2x ri-arrow-down-line"></i>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-subtitle">Three pillars of collaborative learning that empower students to explore, create, and grow together.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ri-video-line"></i></div>
+          <h3 class="feature-title">Feynman Files</h3>
+          <p class="feature-description">Educational video series where complex concepts are explained simply, following the Feynman technique. Learn from peers who can teach like no textbook can.</p>
+          <a href="#feynman-files" class="cta-button">
+            Watch Videos <i class="ri-arrow-right-line"></i>
           </a>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ri-group-line"></i></div>
+          <h3 class="feature-title">Peer Projects</h3>
+          <p class="feature-description">Collaborative student experiments and projects that challenge conventional learning. Work together on real-world problems and creative challenges.</p>
+          <a href="#projects" class="cta-button">
+            View Projects <i class="ri-arrow-right-line"></i>
+          </a>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon"><i class="ri-team-line"></i></div>
+          <h3 class="feature-title">STΛRGZR Network</h3>
+          <p class="feature-description">A community of curious minds who learn, teach, and collaborate beyond the classroom. Connect with mentors and fellow dreamers.</p>
           <a href="#join" class="cta-button">
-            <i class="ri-user-add-line"></i> Join the Network
+            Join Now <i class="ri-arrow-right-line"></i>
           </a>
         </div>
       </div>
+    </section>
 
-      <section class="section">
-        <h2>What We Offer</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon"><i class="ri-video-line"></i></div>
-            <h3>Feynman Files</h3>
-            <p>Educational video series where complex concepts are explained simply, following the Feynman technique. Learn from peers who can teach like no textbook can.</p>
-            <a href="#feynman-files" class="cta-button" style="margin-top: 1rem;">
-              Watch Videos <i class="ri-arrow-right-line"></i>
-            </a>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon"><i class="ri-group-line"></i></div>
-            <h3>Peer Projects</h3>
-            <p>Collaborative student experiments and projects that challenge conventional learning. Work together on real-world problems and creative challenges.</p>
-            <a href="#projects" class="cta-button" style="margin-top: 1rem;">
-              View Projects <i class="ri-arrow-right-line"></i>
-            </a>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon"><i class="ri-team-line"></i></div>
-            <h3>STΛRGZR Network</h3>
-            <p>A community of curious minds who learn, teach, and collaborate beyond the classroom. Connect with mentors and fellow dreamers.</p>
-            <a href="#join" class="cta-button" style="margin-top: 1rem;">
-              Join Now <i class="ri-arrow-right-line"></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="testimonials">
-        <h2>What Our Members Say</h2>
-        <div class="dev-notice">
-          <p><i class="ri-time-line"></i> Testimonials coming soon...</p>
-          <p style="font-size: 0.9rem; margin-top: 0.5rem;">Site under development</p>
-        </div>
-      </section>
-    </div>
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonials" class="section-container narrow">
+      <div class="section-header">
+        <h2 class="section-title">What Our Members Say</h2>
+      </div>
+      <div class="dev-notice">
+        <i class="ri-time-line"></i>
+        <p style="font-size: 1.1rem; font-weight: 500;">Testimonials coming soon...</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">Site under development</p>
+      </div>
+    </section>
 
     <!-- ABOUT SECTION -->
-    <section class="section" id="about">
-      <h2>About STΛRGZR</h2>
-      <div class="about-content">
-        <p>STΛRGZR is a network of curious minds who dream, learn, teach, and collaborate beyond the classroom. We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery.</p>
+    <section id="about" class="section-container narrow">
+      <div class="section-header">
+        <h2 class="section-title">About STΛRGZR</h2>
+        <p class="section-subtitle">A network of curious minds who dream, learn, teach, and collaborate beyond the classroom.</p>
+      </div>
+      <div style="line-height: 1.8; font-size: 1.05rem;">
+        <p style="margin-bottom: 1.5rem;">We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery. Born from a simple idea that students learn best when they're genuinely curious and engaged, STΛRGZR has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
         
-        <p>Born from a simple idea that students learn best when they're genuinely curious and engaged, STΛRGZR has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
-        
-        <p>We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
+        <p style="margin-bottom: 1.5rem;">We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
 
-        <h3 style="margin-top: 2rem;">Our Philosophy</h3>
-        <p><strong>Curiosity:</strong> We believe that genuine curiosity is the foundation of all learning.</p>
-        <p><strong>Exploration:</strong> Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
-        <p><strong>Collaboration:</strong> The best learning happens when we work together, share knowledge, and teach each other.</p>
-        <p><strong>Independence:</strong> We empower members to learn independently and pursue their own interests.</p>
-        <p><strong>Rebellion:</strong> We challenge conventional education systems and create new ways of learning.</p>
+        <h3 style="font-size: 1.5rem; margin: 2.5rem 0 1.5rem; font-weight: 600;">Our Philosophy</h3>
+        
+        <div style="display: grid; gap: 1.5rem;">
+          <div>
+            <strong style="font-size: 1.1rem;">Curiosity</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem;">We believe that genuine curiosity is the foundation of all learning.</p>
+          </div>
+          <div>
+            <strong style="font-size: 1.1rem;">Exploration</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem;">Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
+          </div>
+          <div>
+            <strong style="font-size: 1.1rem;">Collaboration</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem;">The best learning happens when we work together, share knowledge, and teach each other.</p>
+          </div>
+          <div>
+            <strong style="font-size: 1.1rem;">Independence</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem;">We empower members to learn independently and pursue their own interests.</p>
+          </div>
+          <div>
+            <strong style="font-size: 1.1rem;">Rebellion</strong>
+            <p style="opacity: 0.8; margin-top: 0.5rem;">We challenge conventional education systems and create new ways of learning.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PROJECTS SECTION -->
-    <section class="section" id="projects">
-      <h2>Projects</h2>
-      <p>Collaborative experiments, research initiatives, and creative projects from our community members.</p>
+    <section id="projects" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Collaborative experiments, research initiatives, and creative projects from our community members.</p>
+      </div>
       
       <div class="projects-grid">
         <div class="project-card">
           <div class="project-image"><i class="ri-telescope-line"></i></div>
-          <h3>DIY Radio Telescope</h3>
-          <p>Building a functional radio telescope to detect cosmic microwave background radiation using affordable materials.</p>
-          <div class="project-tags">
-            <span class="tag">Astronomy</span>
-            <span class="tag">DIY</span>
-            <span class="tag">In Progress</span>
+          <div class="project-content">
+            <h3 class="project-title">DIY Radio Telescope</h3>
+            <p class="project-description">Building a functional radio telescope to detect cosmic microwave background radiation using affordable materials.</p>
+            <div class="project-tags">
+              <span class="tag">Astronomy</span>
+              <span class="tag">DIY</span>
+              <span class="tag">In Progress</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-image"><i class="ri-rocket-line"></i></div>
-          <h3>Model Rocket Program</h3>
-          <p>Designing, building, and launching model rockets to understand principles of aerodynamics and propulsion.</p>
-          <div class="project-tags">
-            <span class="tag">Physics</span>
-            <span class="tag">Engineering</span>
-            <span class="tag">Active</span>
+          <div class="project-content">
+            <h3 class="project-title">Model Rocket Program</h3>
+            <p class="project-description">Designing, building, and launching model rockets to understand principles of aerodynamics and propulsion.</p>
+            <div class="project-tags">
+              <span class="tag">Physics</span>
+              <span class="tag">Engineering</span>
+              <span class="tag">Active</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-image"><i class="ri-code-line"></i></div>
-          <h3>Open Source Education Platform</h3>
-          <p>Developing a web platform for peer-to-peer learning and knowledge sharing, built entirely by students.</p>
-          <div class="project-tags">
-            <span class="tag">Programming</span>
-            <span class="tag">Web Dev</span>
-            <span class="tag">Planning</span>
+          <div class="project-content">
+            <h3 class="project-title">Open Source Education Platform</h3>
+            <p class="project-description">Developing a web platform for peer-to-peer learning and knowledge sharing, built entirely by students.</p>
+            <div class="project-tags">
+              <span class="tag">Programming</span>
+              <span class="tag">Web Dev</span>
+              <span class="tag">Planning</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-image"><i class="ri-flask-line"></i></div>
-          <h3>Chemistry Visualization App</h3>
-          <p>Interactive mobile app to visualize molecular structures and chemical reactions in 3D.</p>
-          <div class="project-tags">
-            <span class="tag">Chemistry</span>
-            <span class="tag">App Development</span>
-            <span class="tag">In Progress</span>
+          <div class="project-content">
+            <h3 class="project-title">Chemistry Visualization App</h3>
+            <p class="project-description">Interactive mobile app to visualize molecular structures and chemical reactions in 3D.</p>
+            <div class="project-tags">
+              <span class="tag">Chemistry</span>
+              <span class="tag">App Development</span>
+              <span class="tag">In Progress</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-image"><i class="ri-planet-line"></i></div>
-          <h3>Exoplanet Data Analysis</h3>
-          <p>Analyzing open-source data from NASA to identify patterns in exoplanet discoveries and their habitability.</p>
-          <div class="project-tags">
-            <span class="tag">Data Science</span>
-            <span class="tag">Astronomy</span>
-            <span class="tag">Completed</span>
+          <div class="project-content">
+            <h3 class="project-title">Exoplanet Data Analysis</h3>
+            <p class="project-description">Analyzing open-source data from NASA to identify patterns in exoplanet discoveries and their habitability.</p>
+            <div class="project-tags">
+              <span class="tag">Data Science</span>
+              <span class="tag">Astronomy</span>
+              <span class="tag">Completed</span>
+            </div>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-image"><i class="ri-book-open-line"></i></div>
-          <h3>Philosophy Discussion Series</h3>
-          <p>Weekly discussions exploring philosophical questions about science, ethics, and the nature of knowledge.</p>
-          <div class="project-tags">
-            <span class="tag">Philosophy</span>
-            <span class="tag">Discussion</span>
-            <span class="tag">Ongoing</span>
+          <div class="project-content">
+            <h3 class="project-title">Philosophy Discussion Series</h3>
+            <p class="project-description">Weekly discussions exploring philosophical questions about science, ethics, and the nature of knowledge.</p>
+            <div class="project-tags">
+              <span class="tag">Philosophy</span>
+              <span class="tag">Discussion</span>
+              <span class="tag">Ongoing</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div style="text-align: center; margin-top: 3rem;">
-        <a href="#join" class="cta-button">
+        <a href="#join" class="cta-button primary">
           <i class="ri-lightbulb-line"></i> Submit Your Project Idea
         </a>
       </div>
     </section>
 
     <!-- FEYNMAN FILES SECTION -->
-    <section class="section" id="feynman-files">
-      <h2>Feynman Files</h2>
-      <p>Educational videos where complex topics are explained simply. Learn from peers who understand the struggle of learning.</p>
+    <section id="feynman-files" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Feynman Files</h2>
+        <p class="section-subtitle">Educational videos where complex topics are explained simply. Learn from peers who understand the struggle of learning.</p>
+      </div>
       
-      <div class="filter-buttons">
-        <button class="filter-button active" data-filter="all">All Topics</button>
-        <button class="filter-button" data-filter="physics">Physics</button>
-        <button class="filter-button" data-filter="math">Mathematics</button>
-        <button class="filter-button" data-filter="cs">Computer Science</button>
-        <button class="filter-button" data-filter="astro">Astronomy</button>
+      <div class="filter-container">
+        <div class="filter-buttons">
+          <button class="filter-button active" data-filter="all">All Topics</button>
+          <button class="filter-button" data-filter="physics">Physics</button>
+          <button class="filter-button" data-filter="math">Mathematics</button>
+          <button class="filter-button" data-filter="cs">Computer Science</button>
+          <button class="filter-button" data-filter="astro">Astronomy</button>
+        </div>
       </div>
 
       <div class="videos-grid">
@@ -934,7 +1329,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">Quantum Mechanics Explained</div>
-            <p>Understanding the basics of quantum mechanics through everyday analogies.</p>
+            <p class="video-description">Understanding the basics of quantum mechanics through everyday analogies.</p>
             <div class="project-tags">
               <span class="tag">Physics</span>
               <span class="tag">15 min</span>
@@ -946,7 +1341,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">Calculus Intuition</div>
-            <p>Building an intuitive understanding of derivatives and integrals.</p>
+            <p class="video-description">Building an intuitive understanding of derivatives and integrals.</p>
             <div class="project-tags">
               <span class="tag">Mathematics</span>
               <span class="tag">20 min</span>
@@ -958,7 +1353,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">How Computers Think</div>
-            <p>From binary to algorithms: demystifying computer science fundamentals.</p>
+            <p class="video-description">From binary to algorithms: demystifying computer science fundamentals.</p>
             <div class="project-tags">
               <span class="tag">Computer Science</span>
               <span class="tag">18 min</span>
@@ -970,7 +1365,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">Black Holes Simplified</div>
-            <p>What happens when gravity becomes so strong that nothing can escape?</p>
+            <p class="video-description">What happens when gravity becomes so strong that nothing can escape?</p>
             <div class="project-tags">
               <span class="tag">Astronomy</span>
               <span class="tag">12 min</span>
@@ -982,7 +1377,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">Relativity for Beginners</div>
-            <p>Einstein's theory of relativity explained without complex math.</p>
+            <p class="video-description">Einstein's theory of relativity explained without complex math.</p>
             <div class="project-tags">
               <span class="tag">Physics</span>
               <span class="tag">25 min</span>
@@ -994,7 +1389,7 @@
           <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
           <div class="video-info">
             <div class="video-title">The Beauty of Pi</div>
-            <p>Exploring the mysterious constant that appears everywhere in nature.</p>
+            <p class="video-description">Exploring the mysterious constant that appears everywhere in nature.</p>
             <div class="project-tags">
               <span class="tag">Mathematics</span>
               <span class="tag">10 min</span>
@@ -1011,11 +1406,10 @@
     </section>
 
     <!-- JOIN US SECTION -->
-    <section class="section" id="join">
-      <h2>Join STΛRGZR</h2>
-      <div class="about-content">
-        <p>Ready to join a community of curious minds? Whether you want to learn, teach, collaborate, or simply explore your interests, STΛRGZR welcomes you.</p>
-        <p>Fill out the form below to become part of our network. No prerequisites, no requirements — just curiosity and passion.</p>
+    <section id="join" class="section-container narrow">
+      <div class="section-header">
+        <h2 class="section-title">Join STΛRGZR</h2>
+        <p class="section-subtitle">Ready to join a community of curious minds? No prerequisites, no requirements — just curiosity and passion.</p>
       </div>
 
       <div class="form-container">
@@ -1061,20 +1455,22 @@
           </button>
         </form>
 
-        <p style="text-align: center; margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+        <p style="text-align: center; margin-top: 1.5rem; opacity: 0.7; font-size: 0.9rem; line-height: 1.6;">
           By joining, you agree to our community guidelines of respect, curiosity, and collaborative learning.
         </p>
       </div>
     </section>
 
     <!-- BLOG SECTION -->
-    <section class="section" id="blog">
-      <h2>Blog & Articles</h2>
-      <p>Thoughts, discoveries, and stories from the STΛRGZR community.</p>
+    <section id="blog" class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Blog & Articles</h2>
+        <p class="section-subtitle">Thoughts, discoveries, and stories from the STΛRGZR community.</p>
+      </div>
 
       <div class="articles-grid">
         <a href="#" class="article-card">
-          <h3>The Problem with Traditional Education</h3>
+          <h3 class="article-title">The Problem with Traditional Education</h3>
           <p class="article-excerpt">Why memorization-based learning fails to inspire genuine curiosity and how we can do better.</p>
           <div class="project-tags">
             <span class="tag">Education</span>
@@ -1084,7 +1480,7 @@
         </a>
 
         <a href="#" class="article-card">
-          <h3>Learning by Teaching: The Feynman Technique</h3>
+          <h3 class="article-title">Learning by Teaching: The Feynman Technique</h3>
           <p class="article-excerpt">How explaining concepts to others is the most effective way to truly understand them.</p>
           <div class="project-tags">
             <span class="tag">Learning</span>
@@ -1094,7 +1490,7 @@
         </a>
 
         <a href="#" class="article-card">
-          <h3>Building a Telescope from Scratch</h3>
+          <h3 class="article-title">Building a Telescope from Scratch</h3>
           <p class="article-excerpt">A step-by-step guide to constructing your own Newtonian telescope with household materials.</p>
           <div class="project-tags">
             <span class="tag">DIY</span>
@@ -1104,7 +1500,7 @@
         </a>
 
         <a href="#" class="article-card">
-          <h3>Why Peer Learning Works</h3>
+          <h3 class="article-title">Why Peer Learning Works</h3>
           <p class="article-excerpt">Research and personal experiences showing why learning from peers is more effective than traditional lectures.</p>
           <div class="project-tags">
             <span class="tag">Education</span>
@@ -1113,8 +1509,8 @@
           <p class="article-meta">September 28, 2025</p>
         </a>
 
-        <a href="#" class="article-card">
-          <h3>The Joy of Independent Research</h3>
+        <div class="article-card">
+          <h3 class="article-title">The Joy of Independent Research</h3>
           <p class="article-excerpt">How pursuing your own research questions can be more rewarding than following a curriculum.</p>
           <div class="project-tags">
             <span class="tag">Research</span>
@@ -1124,7 +1520,7 @@
         </a>
 
         <a href="#" class="article-card">
-          <h3>From Stargazing to STΛRGZR</h3>
+          <h3 class="article-title">From Stargazing to STΛRGZR</h3>
           <p class="article-excerpt">The origin story of STΛRGZR and how a small astronomy club became a learning movement.</p>
           <div class="project-tags">
             <span class="tag">Story</span>
@@ -1136,10 +1532,10 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section class="section" id="contact">
-      <h2>Contact Us</h2>
-      <div class="about-content">
-        <p>Have questions? Want to collaborate? Interested in bringing STΛRGZR to your city? We'd love to hear from you.</p>
+    <section id="contact" class="section-container narrow">
+      <div class="section-header">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Have questions? Want to collaborate? We'd love to hear from you.</p>
       </div>
 
       <div class="form-container">
@@ -1170,7 +1566,7 @@
         </form>
       </div>
 
-      <h3 style="text-align: center; margin-top: 3rem;">Connect With Us</h3>
+      <h3 style="text-align: center; margin-top: 3rem; font-size: 1.3rem;">Connect With Us</h3>
       <div class="contact-methods">
         <a href="mailto:hello@stargzr.org" class="contact-button">
           <i class="ri-mail-line"></i> Email
@@ -1192,15 +1588,20 @@
 
     <!-- Footer -->
     <footer>
-      <div class="footer-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#join">Join Us</a>
-        <a href="#contact">Contact</a>
+      <div class="footer-content">
+        <div class="footer-logo">STΛRGZR</div>
+        <p class="footer-text">For the people who dream big and look beyond.</p>
+        <div class="footer-links">
+          <a href="#home" class="footer-link">Home</a>
+          <a href="#about" class="footer-link">About</a>
+          <a href="#projects" class="footer-link">Projects</a>
+          <a href="#feynman-files" class="footer-link">Feynman Files</a>
+          <a href="#join" class="footer-link">Join Us</a>
+          <a href="#blog" class="footer-link">Blog</a>
+          <a href="#contact" class="footer-link">Contact</a>
+        </div>
+        <p class="footer-text">&copy; 2025 STΛRGZR. All rights reserved.</p>
       </div>
-      <p>&copy; 2025 STΛRGZR</p>
-      <p style="margin-top: 0.5rem;">For the people who dream big and look beyond.</p>
     </footer>
   </div>
 
@@ -1214,10 +1615,10 @@
 
     const applyTheme = (theme) => {
       document.documentElement.setAttribute('data-theme', theme);
-      const themeIcons = document.querySelectorAll('#theme-toggle i, #theme-toggle-sidebar i');
-      themeIcons.forEach(icon => {
-        icon.className = theme === 'dark' ? 'ri-lg ri-sun-fill' : 'ri-lg ri-moon-clear-fill';
-      });
+      const themeIcon = document.querySelector('#theme-toggle i');
+      if (themeIcon) {
+        themeIcon.className = theme === 'dark' ? 'ri-lg ri-sun-fill' : 'ri-lg ri-moon-clear-fill';
+      }
     };
 
     const toggleTheme = () => {
@@ -1226,6 +1627,11 @@
       localStorage.setItem('theme', newTheme);
       applyTheme(newTheme);
     };
+
+    // Scroll to top
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     // Create stars
     function createStars() {
@@ -1313,27 +1719,35 @@
       }
     }
 
-    // Smooth scroll to sections
-    function smoothScrollTo(targetId) {
-      const target = document.getElementById(targetId);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    // Active nav link on scroll
+    function updateActiveNav() {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-link[data-nav="${sectionId}"]`);
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+          if (navLink) navLink.classList.add('active');
+        }
+      });
     }
 
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
       applyTheme(getPreferredTheme());
       
-      // Theme toggles
-      document.querySelectorAll('#theme-toggle, #theme-toggle-sidebar').forEach(button => {
-        button.addEventListener('click', toggleTheme);
-      });
+      // Theme toggle
+      document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
       
       // Sidebar
       const menuToggle = document.getElementById('menu-toggle');
       const sidebar = document.getElementById('sidebar');
-      const sidebarCollapse = document.getElementById('sidebar-collapse');
+      const sidebarClose = document.getElementById('sidebar-close');
       const overlay = document.getElementById('overlay');
       
       menuToggle.addEventListener('click', () => {
@@ -1342,37 +1756,35 @@
         document.body.style.overflow = 'hidden';
       });
       
-      sidebarCollapse.addEventListener('click', () => {
+      const closeSidebar = () => {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
         document.body.style.overflow = '';
+      };
+      
+      sidebarClose.addEventListener('click', closeSidebar);
+      overlay.addEventListener('click', closeSidebar);
+      
+      // Close sidebar on link click
+      document.querySelectorAll('.sidebar-link[href^="#"]').forEach(link => {
+        link.addEventListener('click', closeSidebar);
       });
       
-      overlay.addEventListener('click', () => {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-      
-      // Smooth scroll navigation
-      document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener('click', (e) => {
+      // Smooth scroll for all anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          const targetId = link.getAttribute('href').slice(1);
-          smoothScrollTo(targetId);
-          
-          // Close sidebar if open
-          sidebar.classList.remove('active');
-          overlay.classList.remove('active');
-          document.body.style.overflow = '';
+          const targetId = this.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
       });
       
-      // Handle initial hash
-      const initialHash = window.location.hash.slice(1);
-      if (initialHash) {
-        setTimeout(() => smoothScrollTo(initialHash), 100);
-      }
+      // Update active nav on scroll
+      window.addEventListener('scroll', updateActiveNav);
+      updateActiveNav();
       
       // Video filter
       const filterButtons = document.querySelectorAll('.filter-button');
@@ -1398,19 +1810,55 @@
       // Form submissions
       document.getElementById('join-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your interest in joining STΛRGZR! We will contact you soon.');
-        e.target.reset();
+        const submitBtn = e.target.querySelector('.submit-button');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="ri-loader-4-line"></i> Submitting...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          alert('Thank you for your interest in joining STΛRGZR! We will contact you soon.');
+          e.target.reset();
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 1500);
       });
       
       document.getElementById('contact-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
-        e.target.reset();
+        const submitBtn = e.target.querySelector('.submit-button');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="ri-loader-4-line"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          alert('Thank you for your message! We will get back to you soon.');
+          e.target.reset();
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }, 1500);
       });
       
       // Create space elements
       createStars();
       setTimeout(initParallaxEffect, 100);
+      
+      // Handle initial hash
+      const hash = window.location.hash;
+      if (hash) {
+        setTimeout(() => {
+          const target = document.querySelector(hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
     });
   </script>
 </body>
