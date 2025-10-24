@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stargzr - For the people who dream big and look beyond</title>
-  <meta name="description" content="Stargzr is a network for students and dreamers who refuse to be confined by traditional education systems. Join our community of curious minds.">
+  <title>STΛRGZR - For the people who dream big and look beyond</title>
+  <meta name="description" content="STΛRGZR is a network for students and dreamers who refuse to be confined by traditional education systems. Join our community of curious minds.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #0a0a0a;
@@ -249,9 +252,11 @@
     }
 
     .logo {
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
     }
 
     .tagline {
@@ -624,6 +629,17 @@
       margin: 2rem 0;
     }
 
+    /* Development Notice */
+    .dev-notice {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 6px;
+      text-align: center;
+      margin: 2rem 0;
+      opacity: 0.7;
+    }
+
     /* Responsive */
     @media (min-width: 769px) {
       .planet {
@@ -677,15 +693,6 @@
         padding-top: 4rem;
       }
     }
-
-    /* Page visibility */
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
   </style>
 </head>
 
@@ -707,25 +714,25 @@
       </button>
     </div>
     <div class="sidebar-menu">
-      <a href="#home" class="sidebar-link" data-page="home">
+      <a href="#home" class="sidebar-link">
         <i class="ri-lg ri-home-line"></i> Home
       </a>
-      <a href="#about" class="sidebar-link" data-page="about">
+      <a href="#about" class="sidebar-link">
         <i class="ri-lg ri-information-line"></i> About
       </a>
-      <a href="#projects" class="sidebar-link" data-page="projects">
+      <a href="#projects" class="sidebar-link">
         <i class="ri-lg ri-rocket-line"></i> Projects
       </a>
-      <a href="#feynman-files" class="sidebar-link" data-page="feynman-files">
+      <a href="#feynman-files" class="sidebar-link">
         <i class="ri-lg ri-video-line"></i> Feynman Files
       </a>
-      <a href="#join" class="sidebar-link" data-page="join">
+      <a href="#join" class="sidebar-link">
         <i class="ri-lg ri-user-add-line"></i> Join Us
       </a>
-      <a href="#blog" class="sidebar-link" data-page="blog">
+      <a href="#blog" class="sidebar-link">
         <i class="ri-lg ri-article-line"></i> Blog
       </a>
-      <a href="#contact" class="sidebar-link" data-page="contact">
+      <a href="#contact" class="sidebar-link">
         <i class="ri-lg ri-mail-line"></i> Contact
       </a>
       <div class="sidebar-divider"></div>
@@ -751,19 +758,19 @@
   <!-- Main Container -->
   <div class="main-container">
     
-    <!-- HOME PAGE -->
-    <div class="page active" id="home">
+    <!-- HOME SECTION -->
+    <div id="home">
       <div class="hero-section">
         <div class="logo-container">
-          <div class="logo">Stargzr</div>
+          <div class="logo">STΛRGZR</div>
         </div>
         <p class="tagline">For the people who dream big and look beyond.</p>
         <p>A network for students and dreamers who refuse to be confined by traditional education systems.</p>
         <div class="cta-buttons">
-          <a href="#projects" class="cta-button" data-page="projects">
+          <a href="#projects" class="cta-button">
             <i class="ri-rocket-line"></i> Explore Projects
           </a>
-          <a href="#join" class="cta-button" data-page="join">
+          <a href="#join" class="cta-button">
             <i class="ri-user-add-line"></i> Join the Network
           </a>
         </div>
@@ -776,7 +783,7 @@
             <div class="feature-icon"><i class="ri-video-line"></i></div>
             <h3>Feynman Files</h3>
             <p>Educational video series where complex concepts are explained simply, following the Feynman technique. Learn from peers who can teach like no textbook can.</p>
-            <a href="#feynman-files" class="cta-button" data-page="feynman-files" style="margin-top: 1rem;">
+            <a href="#feynman-files" class="cta-button" style="margin-top: 1rem;">
               Watch Videos <i class="ri-arrow-right-line"></i>
             </a>
           </div>
@@ -785,443 +792,414 @@
             <div class="feature-icon"><i class="ri-group-line"></i></div>
             <h3>Peer Projects</h3>
             <p>Collaborative student experiments and projects that challenge conventional learning. Work together on real-world problems and creative challenges.</p>
-            <a href="#projects" class="cta-button" data-page="projects" style="margin-top: 1rem;">
+            <a href="#projects" class="cta-button" style="margin-top: 1rem;">
               View Projects <i class="ri-arrow-right-line"></i>
             </a>
           </div>
           
           <div class="feature-card">
             <div class="feature-icon"><i class="ri-team-line"></i></div>
-            <h3>Stargzr Network</h3>
+            <h3>STΛRGZR Network</h3>
             <p>A community of curious minds who learn, teach, and collaborate beyond the classroom. Connect with mentors and fellow dreamers.</p>
-            <a href="#join" class="cta-button" data-page="join" style="margin-top: 1rem;">
+            <a href="#join" class="cta-button" style="margin-top: 1rem;">
               Join Now <i class="ri-arrow-right-line"></i>
             </a>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="testimonials">
         <h2>What Our Members Say</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <p>"Stargzr gave me the freedom to explore topics I'm truly passionate about, without the constraints of a rigid curriculum."</p>
-            <p style="opacity: 0.6; margin-top: 1rem;">— Sarah K., Physics Enthusiast</p>
-          </div>
-          <div class="feature-card">
-            <p>"The community here is incredible. I've learned more from my peers in three months than I did in a year of traditional classes."</p>
-            <p style="opacity: 0.6; margin-top: 1rem;">— Rafi M., Computer Science Student</p>
-          </div>
-          <div class="feature-card">
-            <p>"Finally, a place where asking questions is encouraged and curiosity is celebrated, not stifled."</p>
-            <p style="opacity: 0.6; margin-top: 1rem;">— Priya D., Astronomy Lover</p>
-          </div>
+        <div class="dev-notice">
+          <p><i class="ri-time-line"></i> Testimonials coming soon...</p>
+          <p style="font-size: 0.9rem; margin-top: 0.5rem;">Site under development</p>
         </div>
       </section>
     </div>
 
-    <!-- ABOUT PAGE -->
-    <div class="page" id="about">
-      <section class="section">
-        <h2>About Stargzr</h2>
-        <div class="about-content">
-          <p>Stargzr is a network of curious minds who dream, learn, teach, and collaborate beyond the classroom. We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery.</p>
-          
-          <p>Born from a simple idea that students learn best when they're genuinely curious and engaged, Stargzr has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
-          
-          <p>We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
-
-          <div class="founder-note">
-            <h3>Founder's Note</h3>
-            <p>Stargzr started as a small astronomy club in Bogura, where a few of us would gather to talk about the stars, the universe, and everything in between. What began as casual stargazing sessions evolved into something much bigger — a movement of students who wanted to learn on their own terms.</p>
-            <p>Today, Stargzr is more than just astronomy. It's a philosophy: the belief that curiosity should drive education, that knowledge should be accessible to all, and that the best teachers are often our peers. I invite you to join us on this journey of exploration and discovery.</p>
-            <p style="margin-top: 1rem;"><strong>— Himel Das, Founder</strong></p>
-          </div>
-
-          <h3>Our Philosophy</h3>
-          <p><strong>Curiosity:</strong> We believe that genuine curiosity is the foundation of all learning.</p>
-          <p><strong>Exploration:</strong> Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
-          <p><strong>Collaboration:</strong> The best learning happens when we work together, share knowledge, and teach each other.</p>
-          <p><strong>Independence:</strong> We empower members to learn independently and pursue their own interests.</p>
-          <p><strong>Rebellion:</strong> We challenge conventional education systems and create new ways of learning.</p>
-        </div>
-      </section>
-    </div>
-
-    <!-- PROJECTS PAGE -->
-    <div class="page" id="projects">
-      <section class="section">
-        <h2>Projects</h2>
-        <p>Collaborative experiments, research initiatives, and creative projects from our community members.</p>
+    <!-- ABOUT SECTION -->
+    <section class="section" id="about">
+      <h2>About STΛRGZR</h2>
+      <div class="about-content">
+        <p>STΛRGZR is a network of curious minds who dream, learn, teach, and collaborate beyond the classroom. We believe that education should not be confined to textbooks and exams, but should be a journey of exploration and discovery.</p>
         
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-image"><i class="ri-telescope-line"></i></div>
-            <h3>DIY Radio Telescope</h3>
-            <p>Building a functional radio telescope to detect cosmic microwave background radiation using affordable materials.</p>
-            <div class="project-tags">
-              <span class="tag">Astronomy</span>
-              <span class="tag">DIY</span>
-              <span class="tag">In Progress</span>
-            </div>
-          </div>
+        <p>Born from a simple idea that students learn best when they're genuinely curious and engaged, STΛRGZR has grown into a community where knowledge flows freely, where teaching is peer-to-peer, and where projects are driven by passion rather than grades.</p>
+        
+        <p>We are inspired by those who "stargaze" — those who look beyond what is immediately visible, who dream big, and who refuse to accept limitations. Whether you're interested in physics, programming, philosophy, or poetry, if you have curiosity and the desire to learn and share, you belong here.</p>
 
-          <div class="project-card">
-            <div class="project-image"><i class="ri-rocket-line"></i></div>
-            <h3>Model Rocket Program</h3>
-            <p>Designing, building, and launching model rockets to understand principles of aerodynamics and propulsion.</p>
+        <h3 style="margin-top: 2rem;">Our Philosophy</h3>
+        <p><strong>Curiosity:</strong> We believe that genuine curiosity is the foundation of all learning.</p>
+        <p><strong>Exploration:</strong> Education is not about memorizing facts, but about exploring ideas and discovering new perspectives.</p>
+        <p><strong>Collaboration:</strong> The best learning happens when we work together, share knowledge, and teach each other.</p>
+        <p><strong>Independence:</strong> We empower members to learn independently and pursue their own interests.</p>
+        <p><strong>Rebellion:</strong> We challenge conventional education systems and create new ways of learning.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+      <p>Collaborative experiments, research initiatives, and creative projects from our community members.</p>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image"><i class="ri-telescope-line"></i></div>
+          <h3>DIY Radio Telescope</h3>
+          <p>Building a functional radio telescope to detect cosmic microwave background radiation using affordable materials.</p>
+          <div class="project-tags">
+            <span class="tag">Astronomy</span>
+            <span class="tag">DIY</span>
+            <span class="tag">In Progress</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image"><i class="ri-rocket-line"></i></div>
+          <h3>Model Rocket Program</h3>
+          <p>Designing, building, and launching model rockets to understand principles of aerodynamics and propulsion.</p>
+          <div class="project-tags">
+            <span class="tag">Physics</span>
+            <span class="tag">Engineering</span>
+            <span class="tag">Active</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image"><i class="ri-code-line"></i></div>
+          <h3>Open Source Education Platform</h3>
+          <p>Developing a web platform for peer-to-peer learning and knowledge sharing, built entirely by students.</p>
+          <div class="project-tags">
+            <span class="tag">Programming</span>
+            <span class="tag">Web Dev</span>
+            <span class="tag">Planning</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image"><i class="ri-flask-line"></i></div>
+          <h3>Chemistry Visualization App</h3>
+          <p>Interactive mobile app to visualize molecular structures and chemical reactions in 3D.</p>
+          <div class="project-tags">
+            <span class="tag">Chemistry</span>
+            <span class="tag">App Development</span>
+            <span class="tag">In Progress</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image"><i class="ri-planet-line"></i></div>
+          <h3>Exoplanet Data Analysis</h3>
+          <p>Analyzing open-source data from NASA to identify patterns in exoplanet discoveries and their habitability.</p>
+          <div class="project-tags">
+            <span class="tag">Data Science</span>
+            <span class="tag">Astronomy</span>
+            <span class="tag">Completed</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image"><i class="ri-book-open-line"></i></div>
+          <h3>Philosophy Discussion Series</h3>
+          <p>Weekly discussions exploring philosophical questions about science, ethics, and the nature of knowledge.</p>
+          <div class="project-tags">
+            <span class="tag">Philosophy</span>
+            <span class="tag">Discussion</span>
+            <span class="tag">Ongoing</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="#join" class="cta-button">
+          <i class="ri-lightbulb-line"></i> Submit Your Project Idea
+        </a>
+      </div>
+    </section>
+
+    <!-- FEYNMAN FILES SECTION -->
+    <section class="section" id="feynman-files">
+      <h2>Feynman Files</h2>
+      <p>Educational videos where complex topics are explained simply. Learn from peers who understand the struggle of learning.</p>
+      
+      <div class="filter-buttons">
+        <button class="filter-button active" data-filter="all">All Topics</button>
+        <button class="filter-button" data-filter="physics">Physics</button>
+        <button class="filter-button" data-filter="math">Mathematics</button>
+        <button class="filter-button" data-filter="cs">Computer Science</button>
+        <button class="filter-button" data-filter="astro">Astronomy</button>
+      </div>
+
+      <div class="videos-grid">
+        <div class="video-card" data-category="physics">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">Quantum Mechanics Explained</div>
+            <p>Understanding the basics of quantum mechanics through everyday analogies.</p>
             <div class="project-tags">
               <span class="tag">Physics</span>
-              <span class="tag">Engineering</span>
-              <span class="tag">Active</span>
+              <span class="tag">15 min</span>
             </div>
           </div>
+        </div>
 
-          <div class="project-card">
-            <div class="project-image"><i class="ri-code-line"></i></div>
-            <h3>Open Source Education Platform</h3>
-            <p>Developing a web platform for peer-to-peer learning and knowledge sharing, built entirely by students.</p>
+        <div class="video-card" data-category="math">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">Calculus Intuition</div>
+            <p>Building an intuitive understanding of derivatives and integrals.</p>
             <div class="project-tags">
-              <span class="tag">Programming</span>
-              <span class="tag">Web Dev</span>
-              <span class="tag">Planning</span>
+              <span class="tag">Mathematics</span>
+              <span class="tag">20 min</span>
             </div>
           </div>
+        </div>
 
-          <div class="project-card">
-            <div class="project-image"><i class="ri-flask-line"></i></div>
-            <h3>Chemistry Visualization App</h3>
-            <p>Interactive mobile app to visualize molecular structures and chemical reactions in 3D.</p>
+        <div class="video-card" data-category="cs">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">How Computers Think</div>
+            <p>From binary to algorithms: demystifying computer science fundamentals.</p>
             <div class="project-tags">
-              <span class="tag">Chemistry</span>
-              <span class="tag">App Development</span>
-              <span class="tag">In Progress</span>
+              <span class="tag">Computer Science</span>
+              <span class="tag">18 min</span>
             </div>
           </div>
+        </div>
 
-          <div class="project-card">
-            <div class="project-image"><i class="ri-planet-line"></i></div>
-            <h3>Exoplanet Data Analysis</h3>
-            <p>Analyzing open-source data from NASA to identify patterns in exoplanet discoveries and their habitability.</p>
+        <div class="video-card" data-category="astro">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">Black Holes Simplified</div>
+            <p>What happens when gravity becomes so strong that nothing can escape?</p>
             <div class="project-tags">
-              <span class="tag">Data Science</span>
               <span class="tag">Astronomy</span>
-              <span class="tag">Completed</span>
+              <span class="tag">12 min</span>
             </div>
           </div>
+        </div>
 
-          <div class="project-card">
-            <div class="project-image"><i class="ri-book-open-line"></i></div>
-            <h3>Philosophy Discussion Series</h3>
-            <p>Weekly discussions exploring philosophical questions about science, ethics, and the nature of knowledge.</p>
+        <div class="video-card" data-category="physics">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">Relativity for Beginners</div>
+            <p>Einstein's theory of relativity explained without complex math.</p>
             <div class="project-tags">
-              <span class="tag">Philosophy</span>
-              <span class="tag">Discussion</span>
-              <span class="tag">Ongoing</span>
+              <span class="tag">Physics</span>
+              <span class="tag">25 min</span>
             </div>
           </div>
         </div>
 
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="#join" class="cta-button" data-page="join">
-            <i class="ri-lightbulb-line"></i> Submit Your Project Idea
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <!-- FEYNMAN FILES PAGE -->
-    <div class="page" id="feynman-files">
-      <section class="section">
-        <h2>Feynman Files</h2>
-        <p>Educational videos where complex topics are explained simply. Learn from peers who understand the struggle of learning.</p>
-        
-        <div class="filter-buttons">
-          <button class="filter-button active" data-filter="all">All Topics</button>
-          <button class="filter-button" data-filter="physics">Physics</button>
-          <button class="filter-button" data-filter="math">Mathematics</button>
-          <button class="filter-button" data-filter="cs">Computer Science</button>
-          <button class="filter-button" data-filter="astro">Astronomy</button>
-        </div>
-
-        <div class="videos-grid">
-          <div class="video-card" data-category="physics">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">Quantum Mechanics Explained</div>
-              <p>Understanding the basics of quantum mechanics through everyday analogies.</p>
-              <div class="project-tags">
-                <span class="tag">Physics</span>
-                <span class="tag">15 min</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-card" data-category="math">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">Calculus Intuition</div>
-              <p>Building an intuitive understanding of derivatives and integrals.</p>
-              <div class="project-tags">
-                <span class="tag">Mathematics</span>
-                <span class="tag">20 min</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-card" data-category="cs">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">How Computers Think</div>
-              <p>From binary to algorithms: demystifying computer science fundamentals.</p>
-              <div class="project-tags">
-                <span class="tag">Computer Science</span>
-                <span class="tag">18 min</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-card" data-category="astro">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">Black Holes Simplified</div>
-              <p>What happens when gravity becomes so strong that nothing can escape?</p>
-              <div class="project-tags">
-                <span class="tag">Astronomy</span>
-                <span class="tag">12 min</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-card" data-category="physics">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">Relativity for Beginners</div>
-              <p>Einstein's theory of relativity explained without complex math.</p>
-              <div class="project-tags">
-                <span class="tag">Physics</span>
-                <span class="tag">25 min</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-card" data-category="math">
-            <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
-            <div class="video-info">
-              <div class="video-title">The Beauty of Pi</div>
-              <p>Exploring the mysterious constant that appears everywhere in nature.</p>
-              <div class="project-tags">
-                <span class="tag">Mathematics</span>
-                <span class="tag">10 min</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="#join" class="cta-button" data-page="join">
-            <i class="ri-video-add-line"></i> Submit Your Own Video
-          </a>
-        </div>
-      </section>
-    </div>
-
-    <!-- JOIN US PAGE -->
-    <div class="page" id="join">
-      <section class="section">
-        <h2>Join Stargzr</h2>
-        <div class="about-content">
-          <p>Ready to join a community of curious minds? Whether you want to learn, teach, collaborate, or simply explore your interests, Stargzr welcomes you.</p>
-          <p>Fill out the form below to become part of our network. No prerequisites, no requirements — just curiosity and passion.</p>
-        </div>
-
-        <div class="form-container">
-          <form id="join-form">
-            <div class="form-group">
-              <label for="name">Name *</label>
-              <input type="text" id="name" name="name" required placeholder="Your full name">
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-            </div>
-
-            <div class="form-group">
-              <label for="interest">Area of Interest *</label>
-              <select id="interest" name="interest" required>
-                <option value="">Select your primary interest</option>
-                <option value="physics">Physics</option>
-                <option value="astronomy">Astronomy</option>
-                <option value="mathematics">Mathematics</option>
-                <option value="computer-science">Computer Science</option>
-                <option value="chemistry">Chemistry</option>
-                <option value="biology">Biology</option>
-                <option value="philosophy">Philosophy</option>
-                <option value="engineering">Engineering</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="motivation">Why do you want to join Stargzr? *</label>
-              <textarea id="motivation" name="motivation" required placeholder="Tell us what drives your curiosity and what you hope to achieve with Stargzr..."></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="contribution">How would you like to contribute?</label>
-              <textarea id="contribution" name="contribution" placeholder="Would you like to teach, learn, work on projects, create content, or something else?"></textarea>
-            </div>
-
-            <button type="submit" class="submit-button">
-              <i class="ri-user-add-line"></i> Join Stargzr
-            </button>
-          </form>
-
-          <p style="text-align: center; margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
-            By joining, you agree to our community guidelines of respect, curiosity, and collaborative learning.
-          </p>
-        </div>
-      </section>
-    </div>
-
-    <!-- BLOG PAGE -->
-    <div class="page" id="blog">
-      <section class="section">
-        <h2>Blog & Articles</h2>
-        <p>Thoughts, discoveries, and stories from the Stargzr community.</p>
-
-        <div class="articles-grid">
-          <a href="#" class="article-card">
-            <h3>The Problem with Traditional Education</h3>
-            <p class="article-excerpt">Why memorization-based learning fails to inspire genuine curiosity and how we can do better.</p>
+        <div class="video-card" data-category="math">
+          <div class="video-thumbnail"><i class="ri-play-circle-line"></i></div>
+          <div class="video-info">
+            <div class="video-title">The Beauty of Pi</div>
+            <p>Exploring the mysterious constant that appears everywhere in nature.</p>
             <div class="project-tags">
-              <span class="tag">Education</span>
-              <span class="tag">Philosophy</span>
+              <span class="tag">Mathematics</span>
+              <span class="tag">10 min</span>
             </div>
-            <p class="article-meta">By Himel Das • October 15, 2025</p>
-          </a>
-
-          <a href="#" class="article-card">
-            <h3>Learning by Teaching: The Feynman Technique</h3>
-            <p class="article-excerpt">How explaining concepts to others is the most effective way to truly understand them.</p>
-            <div class="project-tags">
-              <span class="tag">Learning</span>
-              <span class="tag">Methods</span>
-            </div>
-            <p class="article-meta">By Sarah K. • October 10, 2025</p>
-          </a>
-
-          <a href="#" class="article-card">
-            <h3>Building a Telescope from Scratch</h3>
-            <p class="article-excerpt">A step-by-step guide to constructing your own Newtonian telescope with household materials.</p>
-            <div class="project-tags">
-              <span class="tag">DIY</span>
-              <span class="tag">Astronomy</span>
-            </div>
-            <p class="article-meta">By Rafi M. • October 5, 2025</p>
-          </a>
-
-          <a href="#" class="article-card">
-            <h3>Why Peer Learning Works</h3>
-            <p class="article-excerpt">Research and personal experiences showing why learning from peers is more effective than traditional lectures.</p>
-            <div class="project-tags">
-              <span class="tag">Education</span>
-              <span class="tag">Research</span>
-            </div>
-            <p class="article-meta">By Priya D. • September 28, 2025</p>
-          </a>
-
-          <a href="#" class="article-card">
-            <h3>The Joy of Independent Research</h3>
-            <p class="article-excerpt">How pursuing your own research questions can be more rewarding than following a curriculum.</p>
-            <div class="project-tags">
-              <span class="tag">Research</span>
-              <span class="tag">Inspiration</span>
-            </div>
-            <p class="article-meta">By Ahmad T. • September 20, 2025</p>
-          </a>
-
-          <a href="#" class="article-card">
-            <h3>From Stargazing to Stargzr</h3>
-            <p class="article-excerpt">The origin story of Stargzr and how a small astronomy club became a learning movement.</p>
-            <div class="project-tags">
-              <span class="tag">Story</span>
-              <span class="tag">Community</span>
-            </div>
-            <p class="article-meta">By Himel Das • September 15, 2025</p>
-          </a>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
 
-    <!-- CONTACT PAGE -->
-    <div class="page" id="contact">
-      <section class="section">
-        <h2>Contact Us</h2>
-        <div class="about-content">
-          <p>Have questions? Want to collaborate? Interested in bringing Stargzr to your city? We'd love to hear from you.</p>
-        </div>
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="#join" class="cta-button">
+          <i class="ri-video-add-line"></i> Submit Your Own Video
+        </a>
+      </div>
+    </section>
 
-        <div class="form-container">
-          <form id="contact-form">
-            <div class="form-group">
-              <label for="contact-name">Name *</label>
-              <input type="text" id="contact-name" name="name" required placeholder="Your name">
-            </div>
+    <!-- JOIN US SECTION -->
+    <section class="section" id="join">
+      <h2>Join STΛRGZR</h2>
+      <div class="about-content">
+        <p>Ready to join a community of curious minds? Whether you want to learn, teach, collaborate, or simply explore your interests, STΛRGZR welcomes you.</p>
+        <p>Fill out the form below to become part of our network. No prerequisites, no requirements — just curiosity and passion.</p>
+      </div>
 
-            <div class="form-group">
-              <label for="contact-email">Email *</label>
-              <input type="email" id="contact-email" name="email" required placeholder="your.email@example.com">
-            </div>
+      <div class="form-container">
+        <form id="join-form">
+          <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Your full name">
+          </div>
 
-            <div class="form-group">
-              <label for="subject">Subject *</label>
-              <input type="text" id="subject" name="subject" required placeholder="What's this about?">
-            </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+          </div>
 
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea id="message" name="message" required placeholder="Your message..."></textarea>
-            </div>
+          <div class="form-group">
+            <label for="interest">Area of Interest *</label>
+            <select id="interest" name="interest" required>
+              <option value="">Select your primary interest</option>
+              <option value="physics">Physics</option>
+              <option value="astronomy">Astronomy</option>
+              <option value="mathematics">Mathematics</option>
+              <option value="computer-science">Computer Science</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
+              <option value="philosophy">Philosophy</option>
+              <option value="engineering">Engineering</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
 
-            <button type="submit" class="submit-button">
-              <i class="ri-send-plane-line"></i> Send Message
-            </button>
-          </form>
-        </div>
+          <div class="form-group">
+            <label for="motivation">Why do you want to join STΛRGZR? *</label>
+            <textarea id="motivation" name="motivation" required placeholder="Tell us what drives your curiosity and what you hope to achieve with STΛRGZR..."></textarea>
+          </div>
 
-        <h3 style="text-align: center; margin-top: 3rem;">Connect With Us</h3>
-        <div class="contact-methods">
-          <a href="mailto:hello@stargzr.org" class="contact-button">
-            <i class="ri-mail-line"></i> Email
-          </a>
-          <a href="https://youtube.com/@stargzr" class="contact-button" target="_blank">
-            <i class="ri-youtube-line"></i> YouTube
-          </a>
-          <a href="https://discord.gg/stargzr" class="contact-button" target="_blank">
-            <i class="ri-discord-line"></i> Discord
-          </a>
-          <a href="https://instagram.com/stargzr" class="contact-button" target="_blank">
-            <i class="ri-instagram-line"></i> Instagram
-          </a>
-          <a href="https://t.me/stargzr" class="contact-button" target="_blank">
-            <i class="ri-telegram-line"></i> Telegram
-          </a>
-        </div>
-      </section>
-    </div>
+          <div class="form-group">
+            <label for="contribution">How would you like to contribute?</label>
+            <textarea id="contribution" name="contribution" placeholder="Would you like to teach, learn, work on projects, create content, or something else?"></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">
+            <i class="ri-user-add-line"></i> Join STΛRGZR
+          </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">
+          By joining, you agree to our community guidelines of respect, curiosity, and collaborative learning.
+        </p>
+      </div>
+    </section>
+
+    <!-- BLOG SECTION -->
+    <section class="section" id="blog">
+      <h2>Blog & Articles</h2>
+      <p>Thoughts, discoveries, and stories from the STΛRGZR community.</p>
+
+      <div class="articles-grid">
+        <a href="#" class="article-card">
+          <h3>The Problem with Traditional Education</h3>
+          <p class="article-excerpt">Why memorization-based learning fails to inspire genuine curiosity and how we can do better.</p>
+          <div class="project-tags">
+            <span class="tag">Education</span>
+            <span class="tag">Philosophy</span>
+          </div>
+          <p class="article-meta">October 15, 2025</p>
+        </a>
+
+        <a href="#" class="article-card">
+          <h3>Learning by Teaching: The Feynman Technique</h3>
+          <p class="article-excerpt">How explaining concepts to others is the most effective way to truly understand them.</p>
+          <div class="project-tags">
+            <span class="tag">Learning</span>
+            <span class="tag">Methods</span>
+          </div>
+          <p class="article-meta">October 10, 2025</p>
+        </a>
+
+        <a href="#" class="article-card">
+          <h3>Building a Telescope from Scratch</h3>
+          <p class="article-excerpt">A step-by-step guide to constructing your own Newtonian telescope with household materials.</p>
+          <div class="project-tags">
+            <span class="tag">DIY</span>
+            <span class="tag">Astronomy</span>
+          </div>
+          <p class="article-meta">October 5, 2025</p>
+        </a>
+
+        <a href="#" class="article-card">
+          <h3>Why Peer Learning Works</h3>
+          <p class="article-excerpt">Research and personal experiences showing why learning from peers is more effective than traditional lectures.</p>
+          <div class="project-tags">
+            <span class="tag">Education</span>
+            <span class="tag">Research</span>
+          </div>
+          <p class="article-meta">September 28, 2025</p>
+        </a>
+
+        <a href="#" class="article-card">
+          <h3>The Joy of Independent Research</h3>
+          <p class="article-excerpt">How pursuing your own research questions can be more rewarding than following a curriculum.</p>
+          <div class="project-tags">
+            <span class="tag">Research</span>
+            <span class="tag">Inspiration</span>
+          </div>
+          <p class="article-meta">September 20, 2025</p>
+        </a>
+
+        <a href="#" class="article-card">
+          <h3>From Stargazing to STΛRGZR</h3>
+          <p class="article-excerpt">The origin story of STΛRGZR and how a small astronomy club became a learning movement.</p>
+          <div class="project-tags">
+            <span class="tag">Story</span>
+            <span class="tag">Community</span>
+          </div>
+          <p class="article-meta">September 15, 2025</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact">
+      <h2>Contact Us</h2>
+      <div class="about-content">
+        <p>Have questions? Want to collaborate? Interested in bringing STΛRGZR to your city? We'd love to hear from you.</p>
+      </div>
+
+      <div class="form-container">
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Name *</label>
+            <input type="text" id="contact-name" name="name" required placeholder="Your name">
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email">Email *</label>
+            <input type="email" id="contact-email" name="email" required placeholder="your.email@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Your message..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">
+            <i class="ri-send-plane-line"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <h3 style="text-align: center; margin-top: 3rem;">Connect With Us</h3>
+      <div class="contact-methods">
+        <a href="mailto:hello@stargzr.org" class="contact-button">
+          <i class="ri-mail-line"></i> Email
+        </a>
+        <a href="https://youtube.com/@stargzr" class="contact-button" target="_blank">
+          <i class="ri-youtube-line"></i> YouTube
+        </a>
+        <a href="https://discord.gg/stargzr" class="contact-button" target="_blank">
+          <i class="ri-discord-line"></i> Discord
+        </a>
+        <a href="https://instagram.com/stargzr" class="contact-button" target="_blank">
+          <i class="ri-instagram-line"></i> Instagram
+        </a>
+        <a href="https://t.me/stargzr" class="contact-button" target="_blank">
+          <i class="ri-telegram-line"></i> Telegram
+        </a>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer>
       <div class="footer-links">
-        <a href="#home" data-page="home">Home</a>
-        <a href="#about" data-page="about">About</a>
-        <a href="#projects" data-page="projects">Projects</a>
-        <a href="#join" data-page="join">Join Us</a>
-        <a href="#contact" data-page="contact">Contact</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#join">Join Us</a>
+        <a href="#contact">Contact</a>
       </div>
-      <p>&copy; 2025 Stargzr - Founded by Himel Das</p>
+      <p>&copy; 2025 STΛRGZR</p>
       <p style="margin-top: 0.5rem;">For the people who dream big and look beyond.</p>
     </footer>
   </div>
@@ -1335,22 +1313,12 @@
       }
     }
 
-    // Page navigation
-    function navigateToPage(pageId) {
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
-      
-      const targetPage = document.getElementById(pageId);
-      if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo(0, 0);
+    // Smooth scroll to sections
+    function smoothScrollTo(targetId) {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      
-      // Close sidebar if open
-      document.getElementById('sidebar').classList.remove('active');
-      document.getElementById('overlay').classList.remove('active');
-      document.body.style.overflow = '';
     }
 
     // Initialize on load
@@ -1386,20 +1354,24 @@
         document.body.style.overflow = '';
       });
       
-      // Navigation links
-      document.querySelectorAll('[data-page]').forEach(link => {
+      // Smooth scroll navigation
+      document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
           e.preventDefault();
-          const pageId = link.getAttribute('data-page');
-          navigateToPage(pageId);
-          window.location.hash = pageId;
+          const targetId = link.getAttribute('href').slice(1);
+          smoothScrollTo(targetId);
+          
+          // Close sidebar if open
+          sidebar.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
         });
       });
       
       // Handle initial hash
       const initialHash = window.location.hash.slice(1);
-      if (initialHash && document.getElementById(initialHash)) {
-        navigateToPage(initialHash);
+      if (initialHash) {
+        setTimeout(() => smoothScrollTo(initialHash), 100);
       }
       
       // Video filter
@@ -1426,7 +1398,7 @@
       // Form submissions
       document.getElementById('join-form').addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your interest in joining Stargzr! We will contact you soon.');
+        alert('Thank you for your interest in joining STΛRGZR! We will contact you soon.');
         e.target.reset();
       });
       
